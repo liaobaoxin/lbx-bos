@@ -27,8 +27,11 @@
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"></property>
-        <property name="suffix" value=".jsp"></property>
+        <property name="prefix" value="/view"></property>
+       <!-- <property name="suffix" value=".jsp"></property>-->
     </bean>
+
+    <!-- 对静态资源文件的访问 -->
+    <!--<mvc:resources mapping="/static/**" location="/static"/>-->
 
 </beans>
