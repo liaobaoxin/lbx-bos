@@ -250,6 +250,9 @@
                 <configuration>
                     <path>/</path>
                     <port>8030</port>
+                    <systemProperties>
+                        <spring.profiles.active>home</spring.profiles.active>
+                    </systemProperties>
                 </configuration>
             </plugin>
 
@@ -274,6 +277,7 @@
             </resource>
         </resources>
     </build>
+
 
 
 </project>
