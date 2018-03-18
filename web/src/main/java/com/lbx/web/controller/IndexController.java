@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  **/
 @Controller
 public class IndexController {
-    @RequestMapping("index")
+    @RequestMapping("/index")
     public String index(){
         System.out.println("11");
         return "common/index";

@@ -1,8 +1,9 @@
 package com.lbx.service.impl;
 
-import com.lbx.domain.Orderitems;
-import com.lbx.domain.OrderitemsExample;
-import com.lbx.mapper.OrderitemsMapper;
+
+import com.lbx.domain.BaseOrder;
+import com.lbx.domain.BaseOrderExample;
+import com.lbx.mapper.BaseOrderMapper;
 import com.lbx.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +11,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Author: lbx
- * @date 2018/3/2 9:56
- */
+ * Create by lbx on 2018/3/16  20:21
+ **/
 @Service
 public class OrderServiceImpl implements IOrderService {
 
     @Autowired
-    OrderitemsMapper orderitemsMapper;
-
+    BaseOrderMapper baseOrderMapper;
     @Override
-    public Orderitems findAll() {
-        OrderitemsExample example = new OrderitemsExample();
-        List<Orderitems> orderitems = orderitemsMapper.selectByExample(example);
-        return orderitems.get(0);
+    public List<BaseOrder> findAll() {
+        BaseOrderExample example = new BaseOrderExample();
+        List<BaseOrder> orderList = baseOrderMapper.selectByExample(example);
+        return orderList;
     }
 }

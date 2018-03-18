@@ -225,9 +225,9 @@
 </div>
 <div data-options="region:'center'">
     <div id="tabs" fit="true" class="easyui-tabs" border="false">
-        <div title="消息中心" id="subWarp"
+        <div title="物流信息" id="subWarp"
              style="width:100%;height:100%;overflow:hidden">
-            <iframe src="${pageContext.request.contextPath }/page_common_home.action"
+            <iframe src="${pageContext.request.contextPath }/order/page"
                     style="width:100%;height:100%;border:0;"></iframe>
             <%--				这里显示公告栏、预警信息和代办事宜--%>
         </div>

@@ -69,5 +69,7 @@
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:4.0.0-b07" level="project" />
     <orderEntry type="module" module-name="interface" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:4.1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.11" level="project" />
   </component>
 </module>
