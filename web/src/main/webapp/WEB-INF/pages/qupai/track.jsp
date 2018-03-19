@@ -569,23 +569,28 @@
             <div class="mh-cont mh-list-wrap mh-unfold">
                 <div class="mh-list">
                     <ul>
-                        <c:forEach items="${tracking}" var="track" varStatus="index">
-                            <c:if test="${index.index==0}">
-                                <li class="first">
-                                    <p>${track.time}</p>
-                                    <p>${track.context}</p>
-                                    <span class="before"></span><span class="after"></span><i
-                                        class="mh-icon mh-icon-new"></i>
-                                </li>
-                            </c:if>
-                            <c:if test="${index.index!=0}">
-                                <li>
-                                    <p>${track.time}</p>
-                                    <p>${track.context}</p>
-                                    <span class="before"></span><span class="after"></span>
-                                </li>
-                            </c:if>
-                        </c:forEach>
+                        <c:if test="${tracking==null}">
+                            ${message}
+                        </c:if>
+                        <c:if test="${tracking!=null}">
+                            <c:forEach items="${tracking}" var="track" varStatus="index">
+                                <c:if test="${index.index==0}">
+                                    <li class="first">
+                                        <p>${track.time}</p>
+                                        <p>${track.context}</p>
+                                        <span class="before"></span><span class="after"></span><i
+                                            class="mh-icon mh-icon-new"></i>
+                                    </li>
+                                </c:if>
+                                <c:if test="${index.index!=0}">
+                                    <li>
+                                        <p>${track.time}</p>
+                                        <p>${track.context}</p>
+                                        <span class="before"></span><span class="after"></span>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
                     </ul>
                 </div>
             </div>

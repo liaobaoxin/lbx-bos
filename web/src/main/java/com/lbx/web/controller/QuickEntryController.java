@@ -189,12 +189,17 @@ public class QuickEntryController {
 
     @RequestMapping("/logisticsState")
     public ModelAndView logisticsState(ModelAndView modelAndView, String orderNum) {
-        String url = "http://www.kuaidi100.com/query?type=yuantong&postid=" + orderNum + "&temp="+new Random().nextDouble()+"";
+        String url = "http://www.kuaidi100.com/query?type=yuantong&postid=" + orderNum + "&temp=" + new Random().nextDouble() + "";
         String s = HttpClientUtil.httpGetRequest(url);
         ExpressJson expressJson = JSON.parseObject(s, ExpressJson.class);
         List<ExpressJson.DataEntity> tracking = expressJson.getData();
         modelAndView.addObject("tracking", tracking);
-        System.out.println(tracking);
+        if (tracking.size() == 0) {
+            modelAndView.addObject("tracking", null);
+            String message = expressJson.getMessage();
+            modelAndView.addObject("message",message);
+        }
+
         modelAndView.setViewName("/qupai/track");
         return modelAndView;
     }

@@ -28,21 +28,34 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
     <script type="text/javascript">
+
+        function doSearch(value) {
+            if (value == null || value == undefined || value == "") {
+                alert(value);
+                return
+            } else {
+                alert(value);
+                $('#grid').datagrid({
+                    queryParams: {
+                        name: value
+                    }
+                });
+            }
+        }
+
         function editUser(index) {
             var rows = $('#grid').datagrid('getRows');
             var row = rows[index];
             if (row) {
-                alert(JSON.stringify(row));
                 $('#dd').dialog({
                     title: '物流查询',
                     width: 500,
                     height: 700,
-                    resizable:true,
-
+                    resizable: true,
                     closed: false,
                     cache: false,
-                    href: 'logisticsState?orderNum='+row.orderNum,
-                    modal: false
+                    href: 'logisticsState?orderNum=' + row.orderNum,
+                    modal: true
                 });
             }
         }
@@ -168,11 +181,13 @@
                     }
                 },
                 formatter: function (value, row, index) {
-                    if(row.orderNum!=null||row.orderNum!=""){
-
-                        return '<a href="#" onclick="editUser(' + index + ')">+row.name+</a>';//改变表格中内容字体的大小
+                    var orderNum = row.orderNum;
+                    if (orderNum != undefined && orderNum != null && orderNum != "") {
+                        //return '<a href="#" onclick="editUser(' + index + ')">查看物流信息</a>';//改变表格中内容字体的大小
+                        return '<a href="#" style="font-size: 17px;line-height: 20px" onclick="editUser(' + index + ')">' + value + '</a>';//改变表格中内容字体的大小
+                    } else {
+                        return '<span style="font-size: 17px;line-height: 20px">' + value + '</span>';//改变表格中内容字体的大小
                     }
-                    return '<span style="font-size: 17px;line-height: 20px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
                 field: 'telephone',
@@ -226,7 +241,7 @@
                 formatter: function (value, row, index) {
                     return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
-            }, {
+            }, /*{
                 field: 'operate',
                 title: '操作',
                 width: 80,
@@ -234,7 +249,7 @@
                 formatter: function (value, row, index) {
                     return '<a href="#" onclick="editUser(' + index + ')">查看物流信息</a>';//改变表格中内容字体的大小
                 }
-            }]];
+            }*/]];
 
         $(function () {
             // 先将body隐藏，再显示，不会出现页面刷新效果
@@ -250,7 +265,7 @@
                 striped: true,
                 pageList: [30, 50, 100],
                 pagination: true,
-                toolbar: toolbar,
+                toolbar: '#tb',
                 url: "list?" + new Date(),
                 idField: 'id',
                 columns: columns,
@@ -271,9 +286,7 @@
 
 
             });
-
-            // 一键上传
-            $("#btn-upload").upload({
+            $('#btn-upload').upload({
                 name: 'orderFile',  // <input name="file" />
                 action: '${pageContext.request.contextPath}/import',  // 提交请求action路径
                 enctype: 'multipart/form-data', // 编码格式
@@ -304,7 +317,6 @@
                     //获得修改数据
                     var rows = $('#grid').datagrid('getRows');
                     var row = rows[rowIndex];
-                    alert(JSON.stringify(row));
                     $.post('/quick/update', row, function (data) {
                         alert("一" + data);
                         updateRow = undefined;
@@ -312,7 +324,6 @@
 
                 }
             });
-
         }
 
 
@@ -323,44 +334,50 @@
     <table id="grid"></table>
     <div id="win"></div>
 </div>
+<%--工具栏--%>
+<div id="tb" class="datagrid-toolbar">
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+        <tr>
+            <td style="width: 700px;">
+                <%--正常的设备列表--%>
+                <div id="normal">
+                    <div style="float: left; padding: 0px; height: auto">
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+                           onclick="doAdd();">增加一行</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"
+                           onclick="doCancel();">取消编辑</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+                           onclick="doDelete();">删除</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
+                           onclick="doExport();">导出</a>
+                        <a id="btn-upload" href="#" class="easyui-linkbutton" style="display:block"
+                           data-options="iconCls:'icon-redo',plain:true">导入</a>
 
+                    </div>
+                    <%--分割线--%>
+                    <div id="separator" style="float: left;" class="datagrid-btn-separator">
+                    </div>
+                    <div style="float: left; padding: 0px; height: auto">
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+                           onclick="deviceInfoViewClick();">查看</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
+                           onclick="deviceInfoRefreshClick();">刷新</a>
+                    </div>
 
-<div class="track-rcol">
-    <div class="track-list">
-        <ul>
-            <li class="first">
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-            </li>
-            <li>
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">【京东到家】京东配送员【申国龙】已出发，联系电话【18410106883，感谢您的耐心等待，参加评价还能赢取京豆呦】</span>
-            </li>
-            <li>
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-            </li>
-            <li>
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-            </li>
-            <li>
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-            </li>
-            <li>
-                <i class="node-icon"></i>
-                <span class="time">2016-03-10 18:07:15</span>
-                <span class="txt">感谢您在京东购物，欢迎您再次光临！</span>
-            </li>
-        </ul>
-    </div>
+                    <%--下拉搜索框--%>
+                    <div id="searchboxWrapper" style="display: inline-block; padding-top: 3px; text-align: left;
+                            width: 200px;">
+                        <input id="searchbox" class="easyui-searchbox" searcher="doSearch" prompt="请输入查询内容"
+                               style="width: 200px; margin-top: 10px; padding-top: 10px;"/>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
+
+
 <div id="dd">Dialog Content.</div>
 
 
