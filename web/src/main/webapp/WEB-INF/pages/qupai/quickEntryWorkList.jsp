@@ -47,12 +47,16 @@
             }
         }
 
-        function doSave() {
-            alert("保存")
-        }
+        /* function doSave() {
+             if()
+             $("#grid").datagrid('endEdit', 0);
+
+
+         }*/
 
         function doCancel() {
             if (editIndex != undefined) {
+                updateRow=undefined;
                 $("#grid").datagrid('cancelEdit', editIndex);
                 if ($('#grid').datagrid('getRows')[editIndex].id == undefined) {
                     $("#grid").datagrid('deleteRow', editIndex);
@@ -68,6 +72,10 @@
 
         function doDelete() {
             var data = $("#grid").datagrid('getSelections');
+            if(data.length==0){
+                $.messager.alert('提示','请至少选中一行记录','warning');
+                return;
+            }
             var names = new Array();
             var ids = new Array();
 
@@ -109,12 +117,12 @@
             text: '删除',
             iconCls: 'icon-remove',
             handler: doDelete
-        }, {
+        }, /* {
             id: 'button-save',
             text: '保存',
             iconCls: 'icon-save',
             handler: doSave
-        }, {
+        }, */{
             id: 'button-export',
             text: '导出',
             iconCls: 'icon-undo',
@@ -127,37 +135,50 @@
         // 定义列
         var columns = [[
             {
+                field: 'id',
+                checkbox: true
+            },
+            {
                 field: 'name',
                 title: '姓名',
-                width: 120,
+                width: 100,
                 align: 'center',
                 editor: {
                     type: 'validatebox',
                     options: {
                         required: true
                     }
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 20px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
                 field: 'telephone',
                 title: '电话号码',
-                width: 120,
+                width: 140,
                 align: 'center',
                 editor: {
                     type: 'numberbox',
                     options: {
                         required: true
                     }
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
                 field: 'address',
                 title: '地址',
-                width: 300,
+                width: 700,
                 align: 'center',
                 editor: {
                     type: 'validatebox',
                     options: {
                         required: true
                     }
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
                 field: 'goodsDesc',
@@ -167,6 +188,9 @@
                 editor: {
                     type: 'validatebox',
                     options: {}
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
                 field: 'orderNum',
@@ -176,6 +200,9 @@
                 editor: {
                     type: 'validatebox',
                     options: {}
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }]];
 
@@ -188,6 +215,7 @@
                 iconCls: 'icon-forward',
                 fit: true,
                 border: true,
+                autoRowHeight:true,
                 rownumbers: true,
                 striped: true,
                 pageList: [30, 50, 100],
@@ -197,6 +225,7 @@
                 idField: 'id',
                 columns: columns,
                 onDblClickCell: doDblClickCell,
+                checkOnSelect: true,
                 onAfterEdit: function (rowIndex, rowData, changes) {
                     console.info(rowData);
                     editIndex = undefined;
@@ -205,7 +234,13 @@
                             $.messager.alert("提示信息", "录入失败！", "error");
                         }
                     });
+                },
+                rowStyler: function(index,row){
+                    return 'font-weight:50px;';
                 }
+
+
+
             });
 
             // 一键上传
@@ -255,8 +290,8 @@
     </script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
-<div region="center" border="false">
-    <table id="grid"></table>
+<div region="center" border="false" >
+    <table id="grid" ></table>
 </div>
 
 <div class="track-rcol">
