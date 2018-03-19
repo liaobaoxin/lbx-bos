@@ -1,14 +1,9 @@
 package com.lbx.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lbx.domain.BaseOrder;
 import com.lbx.service.QuickService;
-import com.lbx.utils.DateUtil;
-import com.lbx.utils.FileUtils;
-import com.lbx.utils.PageBean;
-import com.lbx.utils.ResultData;
+import com.lbx.utils.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Create by lbx on 2018/3/17  9:37
@@ -162,7 +159,7 @@ public class QuickEntryController {
         HSSFSheet hssfSheet = workbook.getSheet("订单数据");
         for (Row row : hssfSheet) {
             int rowNum = row.getRowNum();
-            if(rowNum == 0){
+            if (rowNum == 0) {
                 continue;
             }
             String name = row.getCell(0).getStringCellValue();
@@ -172,7 +169,7 @@ public class QuickEntryController {
             String orderNum = row.getCell(4).getStringCellValue();
 
             //包装一个订单对象
-            BaseOrder baseOrder = new BaseOrder(name,telphone,address,goodsDesc,orderNum);
+            BaseOrder baseOrder = new BaseOrder(name, telphone, address, goodsDesc, orderNum);
 
             baseOrderList.add(baseOrder);
         }
@@ -186,8 +183,19 @@ public class QuickEntryController {
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));   //true:允许输入空值，false:不能为空值
+        //true:允许输入空值，false:不能为空值
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-
+    @RequestMapping("/logisticsState")
+    public ModelAndView logisticsState(ModelAndView modelAndView, String orderNum) {
+        String url = "http://www.kuaidi100.com/query?type=yuantong&postid=" + orderNum + "&temp="+new Random().nextDouble()+"";
+        String s = HttpClientUtil.httpGetRequest(url);
+        ExpressJson expressJson = JSON.parseObject(s, ExpressJson.class);
+        List<ExpressJson.DataEntity> tracking = expressJson.getData();
+        modelAndView.addObject("tracking", tracking);
+        System.out.println(tracking);
+        modelAndView.setViewName("/qupai/track");
+        return modelAndView;
+    }
 }

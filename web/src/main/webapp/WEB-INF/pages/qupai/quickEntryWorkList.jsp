@@ -28,6 +28,26 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
     <script type="text/javascript">
+        function editUser(index) {
+            var rows = $('#grid').datagrid('getRows');
+            var row = rows[index];
+            if (row) {
+                alert(JSON.stringify(row));
+                $('#dd').dialog({
+                    title: '物流查询',
+                    width: 500,
+                    height: 700,
+                    resizable:true,
+
+                    closed: false,
+                    cache: false,
+                    href: 'logisticsState?orderNum='+row.orderNum,
+                    modal: false
+                });
+            }
+        }
+
+
         var editIndex;//全局变量
         var updateRow;
 
@@ -47,16 +67,15 @@
             }
         }
 
-        /* function doSave() {
-             if()
-             $("#grid").datagrid('endEdit', 0);
-
-
-         }*/
+        function doSave() {
+            if (editIndex != undefined) {
+                $("#grid").datagrid('endEdit', 0);
+            }
+        }
 
         function doCancel() {
             if (editIndex != undefined) {
-                updateRow=undefined;
+                updateRow = undefined;
                 $("#grid").datagrid('cancelEdit', editIndex);
                 if ($('#grid').datagrid('getRows')[editIndex].id == undefined) {
                     $("#grid").datagrid('deleteRow', editIndex);
@@ -72,8 +91,8 @@
 
         function doDelete() {
             var data = $("#grid").datagrid('getSelections');
-            if(data.length==0){
-                $.messager.alert('提示','请至少选中一行记录','warning');
+            if (data.length == 0) {
+                $.messager.alert('提示', '请至少选中一行记录', 'warning');
                 return;
             }
             var names = new Array();
@@ -91,7 +110,6 @@
                         url: url,
                         success: function (data) {
                             $('#grid').datagrid('reload'); // 刷新当前页数据
-                            alert(data)
                         }
                     });
                 }
@@ -105,7 +123,7 @@
         var toolbar = [{
             id: 'button-add',
             text: '新增一行',
-            iconCls: 'icon-edit',
+            iconCls: 'icon-add',
             handler: doAdd
         }, {
             id: 'button-cancel',
@@ -117,12 +135,12 @@
             text: '删除',
             iconCls: 'icon-remove',
             handler: doDelete
-        }, /* {
+        }, /*{
             id: 'button-save',
             text: '保存',
             iconCls: 'icon-save',
             handler: doSave
-        }, */{
+        },*/ {
             id: 'button-export',
             text: '导出',
             iconCls: 'icon-undo',
@@ -150,6 +168,10 @@
                     }
                 },
                 formatter: function (value, row, index) {
+                    if(row.orderNum!=null||row.orderNum!=""){
+
+                        return '<a href="#" onclick="editUser(' + index + ')">+row.name+</a>';//改变表格中内容字体的大小
+                    }
                     return '<span style="font-size: 17px;line-height: 20px">' + value + '</span>';//改变表格中内容字体的大小
                 }
             }, {
@@ -195,7 +217,7 @@
             }, {
                 field: 'orderNum',
                 title: '订单编号',
-                width: 120,
+                width: 200,
                 align: 'center',
                 editor: {
                     type: 'validatebox',
@@ -203,6 +225,14 @@
                 },
                 formatter: function (value, row, index) {
                     return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
+                }
+            }, {
+                field: 'operate',
+                title: '操作',
+                width: 80,
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return '<a href="#" onclick="editUser(' + index + ')">查看物流信息</a>';//改变表格中内容字体的大小
                 }
             }]];
 
@@ -215,7 +245,7 @@
                 iconCls: 'icon-forward',
                 fit: true,
                 border: true,
-                autoRowHeight:true,
+                autoRowHeight: true,
                 rownumbers: true,
                 striped: true,
                 pageList: [30, 50, 100],
@@ -235,10 +265,9 @@
                         }
                     });
                 },
-                rowStyler: function(index,row){
+                rowStyler: function (index, row) {
                     return 'font-weight:50px;';
                 }
-
 
 
             });
@@ -290,9 +319,11 @@
     </script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
-<div region="center" border="false" >
-    <table id="grid" ></table>
+<div region="center" border="false">
+    <table id="grid"></table>
+    <div id="win"></div>
 </div>
+
 
 <div class="track-rcol">
     <div class="track-list">
@@ -330,6 +361,8 @@
         </ul>
     </div>
 </div>
-<div id="delete">Dialog Content.</div>
+<div id="dd">Dialog Content.</div>
+
+
 </body>
 </html>

@@ -145,7 +145,7 @@
                 striped: true,
                 pageList: [30, 50, 100],
                 pagination: true,
-                toolbar: toolbar,
+                toolbar: "#tb",
                 url: "list",
                 idField: 'id',
                 columns: columns,
@@ -220,8 +220,6 @@
 </div>
 
 
-
-
 <!-- 添加 修改分区 -->
 <div class="easyui-window" title="分区添加修改" id="addSubareaWindow" collapsible="false" minimizable="false"
      maximizable="false" style="top:20px;left:200px">
@@ -241,83 +239,24 @@
             });
         </script>
     </div>
+</div>
+<%--复杂工具栏--%>
+<div id="tb" style="padding:0px;height:auto">
+    <div style="margin-bottom:5px">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
 
-    <div style="overflow:auto;padding:5px;" border="false">
-        <form id="addSubareaForm" action="subareaAction_add.action" method="post">
-            <table class="table-edit" width="80%" align="center">
-                <tr class="title">
-                    <td colspan="2">分区信息</td>
-                </tr>
-                <tr>
-                    <td>选择区域</td>
-                    <td>
-                        <input class="easyui-combobox" name="region.id"
-                               data-options="valueField:'id',textField:'name',mode:'remote',url:'regionAction_listajax.action'"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>关键字</td>
-                    <td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
-                </tr>
-                <tr>
-                    <td>起始号</td>
-                    <td><input type="text" name="startnum" class="easyui-validatebox" required="true"/></td>
-                </tr>
-                <tr>
-                    <td>终止号</td>
-                    <td><input type="text" name="endnum" class="easyui-validatebox" required="true"/></td>
-                </tr>
-                <tr>
-                    <td>单双号</td>
-                    <td>
-                        <select class="easyui-combobox" name="single" style="width:150px;">
-                            <option value="0">单双号</option>
-                            <option value="1">单号</option>
-                            <option value="2">双号</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>位置信息</td>
-                    <td><input type="text" name="position" class="easyui-validatebox" required="true"
-                               style="width:250px;"/></td>
-                </tr>
-            </table>
-        </form>
+        日期: <input class="easyui-datebox" style="width:100px">
+        至: <input class="easyui-datebox" panelHeight="auto" style="width:100px">
+        <input id="ss" class="easyui-searchbox"
+               prompt="请输入用户名"
+               style="width: 130px; "/>
     </div>
 </div>
 <!-- 查询分区 -->
-<div class="easyui-window" title="查询分区窗口" id="searchWindow" collapsible="false" minimizable="false" maximizable="false"
-     style="top:20px;left:200px">
-    <div style="overflow:auto;padding:5px;" border="false">
-        <form id="searchForm">
-            <table class="table-edit" width="80%" align="center">
-                <tr class="title">
-                    <td colspan="2">查询条件</td>
-                </tr>
-                <tr>
-                    <td>省</td>
-                    <td><input type="text" name="region.province"/></td>
-                </tr>
-                <tr>
-                    <td>市</td>
-                    <td><input type="text" name="region.city"/></td>
-                </tr>
-                <tr>
-                    <td>区（县）</td>
-                    <td><input type="text" name="region.district"/></td>
-                </tr>
-                <tr>
-                    <td>关键字</td>
-                    <td><input type="text" name="addresskey"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
+
 </body>
 </html>
