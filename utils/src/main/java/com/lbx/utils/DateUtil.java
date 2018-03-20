@@ -93,6 +93,9 @@ public class DateUtil {
      * @return
      */
     public static Date strToDateLong(String strDate) {
+        if(strDate==null){
+            return null;
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ParsePosition pos = new ParsePosition(0);
         Date strtodate = formatter.parse(strDate, pos);

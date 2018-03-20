@@ -1,7 +1,6 @@
 package com.lbx.service;
 
 import com.lbx.domain.BaseOrder;
-import com.lbx.domain.BaseOrderExample;
 import com.lbx.utils.PageBean;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public interface QuickService {
      * 按日期降序
      * @return
      */
-    PageBean findList(PageBean pageBean);
+    PageBean findList(PageBean pageBean,String preDate,String sutDate,String keyWord);
 
     /**
      * 查找没有商品描述的数据

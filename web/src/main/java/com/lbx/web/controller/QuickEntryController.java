@@ -72,8 +72,9 @@ public class QuickEntryController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public ResultData list(PageBean pageBean) {
-        quickService.findList(pageBean);
+    public ResultData list(PageBean pageBean,String preDate,String sutDate,String keyWord) {
+
+        quickService.findList(pageBean,preDate,sutDate,keyWord);
         return ResultData.pageData(pageBean.getTotal(), pageBean.getRowList());
     }
 

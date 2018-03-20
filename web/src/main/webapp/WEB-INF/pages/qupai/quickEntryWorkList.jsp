@@ -30,17 +30,15 @@
     <script type="text/javascript">
 
         function doSearch(value) {
-            if (value == null || value == undefined || value == "") {
-                alert(value);
-                return
-            } else {
-                alert(value);
-                $('#grid').datagrid({
-                    queryParams: {
-                        name: value
-                    }
-                });
-            }
+            var preDate = $('#preDate').datetimebox('getValue');
+            var sutDate = $('#sutDate').datetimebox('getValue');
+            $('#grid').datagrid({
+                queryParams: {
+                    keyWord: value,
+                    preDate: preDate,
+                    sutDate: sutDate
+                }
+            });
         }
 
         function editUser(index) {
@@ -82,7 +80,16 @@
 
         function doSave() {
             if (editIndex != undefined) {
-                $("#grid").datagrid('endEdit', 0);
+                $("#grid").datagrid('endEdit', editIndex);
+            }
+            if (updateRow != undefined) {
+                $('#grid').datagrid('endEdit', updateRow);
+                //获得修改数据
+                var rows = $('#grid').datagrid('getRows');
+                var row = rows[updateRow];
+                $.post('/quick/update', row, function (data) {
+                    updateRow = undefined;
+                })
             }
         }
 
@@ -99,6 +106,10 @@
 
         function doExport() {
             window.location.href = "/quick/export";
+        }
+
+        function refresh() {
+            $('#grid').datagrid('reload');
         }
 
 
@@ -183,7 +194,6 @@
                 formatter: function (value, row, index) {
                     var orderNum = row.orderNum;
                     if (orderNum != undefined && orderNum != null && orderNum != "") {
-                        //return '<a href="#" onclick="editUser(' + index + ')">查看物流信息</a>';//改变表格中内容字体的大小
                         return '<a href="#" style="font-size: 17px;line-height: 20px" onclick="editUser(' + index + ')">' + value + '</a>';//改变表格中内容字体的大小
                     } else {
                         return '<span style="font-size: 17px;line-height: 20px">' + value + '</span>';//改变表格中内容字体的大小
@@ -241,15 +251,7 @@
                 formatter: function (value, row, index) {
                     return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
-            }, /*{
-                field: 'operate',
-                title: '操作',
-                width: 80,
-                align: 'center',
-                formatter: function (value, row, index) {
-                    return '<a href="#" onclick="editUser(' + index + ')">查看物流信息</a>';//改变表格中内容字体的大小
-                }
-            }*/]];
+            },]];
 
         $(function () {
             // 先将body隐藏，再显示，不会出现页面刷新效果
@@ -280,11 +282,6 @@
                         }
                     });
                 },
-                rowStyler: function (index, row) {
-                    return 'font-weight:50px;';
-                }
-
-
             });
             $('#btn-upload').upload({
                 name: 'orderFile',  // <input name="file" />
@@ -303,14 +300,14 @@
         });
 
         function doDblClickCell(rowIndex, field, value) {
-            if (updateRow == "OK") {
+            if (updateRow != undefined) {
                 alert("请为编辑的数据敲回车键");
                 return;
             }
             $('#grid').datagrid('beginEdit', rowIndex);
             var ed = $('#grid').datagrid('getEditor', {index: rowIndex, field: field});
             editIndex = rowIndex;
-            updateRow = "OK";
+            updateRow = rowIndex;
             $(ed.target).keydown(function (e) {
                 if (e.which == 13) {
                     $('#grid').datagrid('endEdit', rowIndex);
@@ -358,27 +355,31 @@
                     <div id="separator" style="float: left;" class="datagrid-btn-separator">
                     </div>
                     <div style="float: left; padding: 0px; height: auto">
-                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
-                           onclick="deviceInfoViewClick();">查看</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+                           onclick="doSave();">保存</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
-                           onclick="deviceInfoRefreshClick();">刷新</a>
+                           onclick="refresh();">刷新</a>
+                        订单日期 <input id="preDate" class="easyui-datetimebox"
+                                    style="width:150px;">
+                        &nbsp; 至 &nbsp;&nbsp;<input class="easyui-datetimebox" id="sutDate"
+                                                    style="width:150px;">
                     </div>
 
+                    <div>
+
+                    </div>
+                    <%--分割线--%>
                     <%--下拉搜索框--%>
                     <div id="searchboxWrapper" style="display: inline-block; padding-top: 3px; text-align: left;
                             width: 200px;">
-                        <input id="searchbox" class="easyui-searchbox" searcher="doSearch" prompt="请输入查询内容"
-                               style="width: 200px; margin-top: 10px; padding-top: 10px;"/>
-
+                        <input id="searchbox" class="easyui-searchbox" searcher="doSearch" prompt="请输入手机号码或者姓名或者快递单号"
+                               style="width: 300px; margin-top: 10px; padding-top: 10px;"/>
                     </div>
                 </div>
             </td>
         </tr>
     </table>
 </div>
-
-
-<div id="dd">Dialog Content.</div>
 
 
 </body>
