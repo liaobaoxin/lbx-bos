@@ -109,6 +109,10 @@
         }
 
         function refresh() {
+            $('#sutDate').datebox('setValue', '');
+            $('#preDate').datebox('setValue', '');
+            $('#searchbox').searchbox('setValue', '');
+
             $('#grid').datagrid('reload');
         }
 
@@ -179,8 +183,7 @@
             {
                 field: 'id',
                 checkbox: true
-            },
-            {
+            }, {
                 field: 'name',
                 title: '姓名',
                 width: 100,
@@ -359,9 +362,9 @@
                            onclick="doSave();">保存</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
                            onclick="refresh();">刷新</a>
-                        订单日期 <input id="preDate" class="easyui-datetimebox"
+                        订单日期 <input id="preDate" class="easyui-datebox"
                                     style="width:150px;">
-                        &nbsp; 至 &nbsp;&nbsp;<input class="easyui-datetimebox" id="sutDate"
+                        &nbsp; 至 &nbsp;&nbsp;<input class="easyui-datebox" id="sutDate"
                                                     style="width:150px;">
                     </div>
 
