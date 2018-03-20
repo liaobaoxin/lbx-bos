@@ -1,7 +1,5 @@
 package com.lbx.utils;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.util.List;
 
 /**
@@ -15,7 +13,7 @@ public class PageBean {
 
 
     public Integer getPage() {
-        return page;
+        return page-1;
     }
 
     public void setPage(Integer page) {

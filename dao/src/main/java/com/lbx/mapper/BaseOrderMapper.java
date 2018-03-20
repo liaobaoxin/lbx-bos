@@ -94,4 +94,8 @@ public interface BaseOrderMapper {
      * @mbggenerated Sun Mar 18 14:35:18 CST 2018
      */
     int updateByPrimaryKey(BaseOrder record);
+
+    List<BaseOrder> conditionFind(String sql);
+
+    Integer conditionFindCount(String sql);
 }

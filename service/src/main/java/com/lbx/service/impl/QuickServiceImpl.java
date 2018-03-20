@@ -60,36 +60,10 @@ public class QuickServiceImpl implements QuickService {
         }
         countSql.append("ORDER BY add_time DESC LIMIT " + pageBean.getPage() + "," + pageBean.getRows() + "");
 
-
-
-
-
-     /*   PageHelper.startPage(pageBean.getPage(), pageBean.getRows());
-        BaseOrderExample example = new BaseOrderExample();
-        //按时间降序
-        example.setOrderByClause("add_time desc");
-        //创建查询条件
-        BaseOrderExample.Criteria criteria = example.createCriteria();
-        //查找指定日期记录
-        if (preDate != null) {
-            Date pre = DateUtil.strToDateLong(preDate);
-            Date sut = DateUtil.strToDateLong(sutDate);
-            criteria.andAddTimeBetween(pre, sut);
-        }
-
-
-        //查找关键词
-        if (keyWord != null) {
-            criteria.andnameor
-        }
-
-        criteria.andIsDeleteEqualTo(false);
-
-        List<BaseOrder> baseOrders = baseOrderMapper.selectByExample(example);
-
+        List<BaseOrder> baseOrders = baseOrderMapper.conditionFind(sql.toString());
+        Integer total = baseOrderMapper.conditionFindCount(countSql.toString());
+        pageBean.setTotal((long) total);
         pageBean.setRowList(baseOrders);
-        PageInfo<BaseOrder> pageInfo = new PageInfo<>(baseOrders);
-        pageBean.setTotal(pageInfo.getTotal());*/
         return pageBean;
     }
 

@@ -363,4 +363,11 @@
       export_courier = #{exportCourier,jdbcType=BIT}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="conditionFind" parameterType="String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+  <select id="conditionFindCount" parameterType="String" resultType="java.lang.Integer">
+    ${value}
+  </select>
 </mapper>
