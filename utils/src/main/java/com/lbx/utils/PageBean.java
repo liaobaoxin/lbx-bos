@@ -6,7 +6,7 @@ import java.util.List;
  * Create by lbx on 2018/3/17  14:14
  **/
 public class PageBean {
-    private Integer page;
+    private Integer page=0;
     private Integer rows;
     private List rowList;
     private Long total;//总记录数
