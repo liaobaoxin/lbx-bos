@@ -45,7 +45,7 @@
             var rows = $('#grid').datagrid('getRows');
             var row = rows[index];
             if (row) {
-                $('#dd').dialog({
+                $('#win').dialog({
                     title: '物流查询',
                     width: 500,
                     height: 700,
@@ -254,7 +254,19 @@
                 formatter: function (value, row, index) {
                     return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
                 }
-            },]];
+            }, {
+                field: 'addTime',
+                title: '时间',
+                width: 200,
+                align: 'center',
+                editor: {
+                    type: 'validatebox',
+                    options: {}
+                },
+                formatter: function (value, row, index) {
+                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
+                }
+            }]];
 
         $(function () {
             // 先将body隐藏，再显示，不会出现页面刷新效果
@@ -362,16 +374,14 @@
                            onclick="doSave();">保存</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
                            onclick="refresh();">刷新</a>
+
                         订单日期 <input id="preDate" class="easyui-datebox"
                                     style="width:150px;">
                         &nbsp; 至 &nbsp;&nbsp;<input class="easyui-datebox" id="sutDate"
                                                     style="width:150px;">
                     </div>
 
-                    <div>
 
-                    </div>
-                    <%--分割线--%>
                     <%--下拉搜索框--%>
                     <div id="searchboxWrapper" style="display: inline-block; padding-top: 3px; text-align: left;
                             width: 200px;">

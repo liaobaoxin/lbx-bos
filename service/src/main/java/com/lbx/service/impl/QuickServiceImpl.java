@@ -39,7 +39,7 @@ public class QuickServiceImpl implements QuickService {
         StringBuilder sql = new StringBuilder();
         sql.append("select * from base_order WHERE is_delete= 0 ");
         if (StringUtil.isNotEmpty(preDate) && StringUtil.isNotEmpty(sutDate)) {
-            sql.append("AND add_time BETWEEN '" + preDate + "'  AND '" + sutDate + "' ");
+            sql.append("AND DATE(add_time) BETWEEN '" + preDate + "'  AND '" + sutDate + "' ");
         }
         if (StringUtil.isNotEmpty(keyWord)) {
             sql.append("AND NAME LIKE '%" + keyWord + "%' ");

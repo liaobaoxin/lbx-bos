@@ -1,6 +1,5 @@
 package com.lbx.web.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.lbx.domain.BaseOrder;
 import com.lbx.service.QuickService;
 import com.lbx.utils.*;
@@ -25,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 /**
  * Create by lbx on 2018/3/17  9:37
@@ -72,9 +71,9 @@ public class QuickEntryController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public ResultData list(PageBean pageBean,String preDate,String sutDate,String keyWord) {
+    public ResultData list(PageBean pageBean, String preDate, String sutDate, String keyWord) {
 
-        quickService.findList(pageBean,preDate,sutDate,keyWord);
+        quickService.findList(pageBean, preDate, sutDate, keyWord);
         return ResultData.pageData(pageBean.getTotal(), pageBean.getRowList());
     }
 
@@ -190,18 +189,18 @@ public class QuickEntryController {
 
     @RequestMapping("/logisticsState")
     public ModelAndView logisticsState(ModelAndView modelAndView, String orderNum) {
-        String url = "http://www.kuaidi100.com/query?type=yuantong&postid=" + orderNum + "&temp=" + new Random().nextDouble() + "";
-        String s = HttpClientUtil.httpGetRequest(url);
-        ExpressJson expressJson = JSON.parseObject(s, ExpressJson.class);
-        List<ExpressJson.DataEntity> tracking = expressJson.getData();
+        Map<String, Object> map = LogisticsUtil.expressInforByOrderNum(orderNum);
+        List<ExpressJson.DataEntity> tracking = (List<ExpressJson.DataEntity>) map.get("tracking");
         modelAndView.addObject("tracking", tracking);
         if (tracking.size() == 0) {
             modelAndView.addObject("tracking", null);
-            String message = expressJson.getMessage();
-            modelAndView.addObject("message",message);
+            String message = (String) map.get("message");
+            modelAndView.addObject("message", message);
         }
 
         modelAndView.setViewName("/qupai/track");
         return modelAndView;
     }
+
+
 }
