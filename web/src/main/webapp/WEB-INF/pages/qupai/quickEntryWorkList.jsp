@@ -32,6 +32,21 @@
 
     <script type="text/javascript">
 
+
+        function shortMessage() {
+            $('#shortMessage').dialog({
+                title: '短信',
+                width: 300,
+                height: 500,
+                buttons:'#bb',
+                resizable: true,
+                closed: false,
+                cache: false,
+                href: '/quick/zTree',
+                modal: true
+            });
+        }
+
         function doSearch(value) {
             var preDate = $('#preDate').datetimebox('getValue');
             var sutDate = $('#sutDate').datetimebox('getValue');
@@ -253,7 +268,7 @@
                 editor: {
                     type: 'validatebox',
                     options: {
-                        validType:'length[10,90]'
+                        validType: 'length[10,90]'
                     }
                 },
                 formatter: function (value, row, index) {
@@ -352,6 +367,11 @@
 <div region="center" border="false">
     <table id="grid"></table>
     <div id="win"></div>
+    <div id="shortMessage"></div>
+    <div id="bb">
+        <a href="#" class="easyui-linkbutton">Save</a>
+        <a href="#" class="easyui-linkbutton">Close</a>
+    </div>
 </div>
 <%--工具栏--%>
 <div id="tb" class="datagrid-toolbar">
@@ -369,6 +389,8 @@
                            onclick="doDelete();">删除</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
                            onclick="doExport();">导出</a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
+                           onclick="shortMessage();">短信</a>
                         <a id="btn-upload" href="#" class="easyui-linkbutton" style="display:block"
                            data-options="iconCls:'icon-redo',plain:true">导入</a>
 

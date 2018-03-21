@@ -335,4 +335,20 @@ public class BaseOrder {
     public void setExportCourier(Boolean exportCourier) {
         this.exportCourier = exportCourier;
     }
+
+    @Override
+    public String toString() {
+        return "BaseOrder{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", address='" + address + '\'' +
+                ", goodsDesc='" + goodsDesc + '\'' +
+                ", orderNum='" + orderNum + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", isDelete=" + isDelete +
+                ", exportCourier=" + exportCourier +
+                '}';
+    }
 }

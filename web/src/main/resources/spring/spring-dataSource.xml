@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <!-- 加载外部文件 -->
-   <!-- <context:property-placeholder location="classpath:conf/dbconfig.properties"/>-->
+    <context:property-placeholder location="classpath:companyConf/dbconfig.properties"/>
 
     <!-- 阿里 druid 数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">

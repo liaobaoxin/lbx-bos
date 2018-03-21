@@ -179,14 +179,19 @@ public class QuickEntryController {
     }
 
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        //true:允许输入空值，false:不能为空值
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    @RequestMapping("/zTree")
+    public String zTree() {
+        return "qupai/zTree";
     }
 
+
+    /**
+     * 快递查询
+     *
+     * @param modelAndView
+     * @param orderNum
+     * @return
+     */
     @RequestMapping("/logisticsState")
     public ModelAndView logisticsState(ModelAndView modelAndView, String orderNum) {
         Map<String, Object> map = LogisticsUtil.expressInforByOrderNum(orderNum);
@@ -200,6 +205,14 @@ public class QuickEntryController {
 
         modelAndView.setViewName("/qupai/track");
         return modelAndView;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        //true:允许输入空值，false:不能为空值
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
 
