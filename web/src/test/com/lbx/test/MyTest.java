@@ -1,6 +1,7 @@
 package com.lbx.test;
 
 import com.lbx.domain.BaseOrder;
+import com.lbx.domain.BaseOrderExample;
 import com.lbx.mapper.BaseOrderMapper;
 import com.lbx.service.QuickService;
 import org.junit.Test;
@@ -19,12 +20,12 @@ import java.util.List;
 @ContextConfiguration(locations = "classpath:spring/spring-*.xml")//加载配置文件
 public class MyTest {
 
-   @Autowired
+    @Autowired
     BaseOrderMapper baseOrderMapper;
 
     @Test
-    public void  fun1(){
-        BaseOrder baseOrder = baseOrderMapper.selectByPrimaryKey(33);
-        System.out.println(baseOrder);
+    public void fun1() {
+        List<String> stringList = baseOrderMapper.differentYear();
+        System.out.println(stringList);
     }
 }

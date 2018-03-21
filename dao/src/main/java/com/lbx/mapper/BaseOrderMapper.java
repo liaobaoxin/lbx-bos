@@ -3,6 +3,7 @@ package com.lbx.mapper;
 import com.lbx.domain.BaseOrder;
 import com.lbx.domain.BaseOrderExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -98,4 +99,10 @@ public interface BaseOrderMapper {
     List<BaseOrder> conditionFind(String sql);
 
     Integer conditionFindCount(String sql);
+
+    /**
+     * 获取不重复的年份
+     */
+    @Select("SELECT YEAR(add_time) FROM base_order GROUP BY YEAR(add_time)")
+    List<String> differentYear();
 }
