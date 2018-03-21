@@ -252,7 +252,9 @@
                 align: 'center',
                 editor: {
                     type: 'validatebox',
-                    options: {}
+                    options: {
+                        validType:'length[10,90]'
+                    }
                 },
                 formatter: function (value, row, index) {
                     return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
