@@ -27,6 +27,9 @@
             src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath }/js/DateFormat.js"></script>
+
     <script type="text/javascript">
 
         function doSearch(value) {
@@ -259,12 +262,14 @@
                 title: '时间',
                 width: 200,
                 align: 'center',
-                editor: {
-                    type: 'validatebox',
-                    options: {}
-                },
                 formatter: function (value, row, index) {
-                    return '<span style="font-size: 17px;line-height: 30px">' + value + '</span>';//改变表格中内容字体的大小
+                    if (value == undefined) {
+                        return '<span style="font-size: 17px;line-height: 30px">' + new Date().Format("yyyy-MM-dd hh:mm:ss");
+                        +'</span>';//改变表格中内容字体的大小
+                    } else {
+                        return '<span style="font-size: 17px;line-height: 30px">' + value
+                            + '</span>';//改变表格中内容字体的大小
+                    }
                 }
             }]];
 

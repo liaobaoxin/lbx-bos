@@ -225,9 +225,9 @@
 </div>
 <div data-options="region:'center'">
     <div id="tabs" fit="true" class="easyui-tabs" border="false">
-        <div title="物流信息" id="subWarp"
+        <div title="订单管理" id="subWarp"
              style="width:100%;height:100%;overflow:hidden">
-            <iframe src="${pageContext.request.contextPath }/order/page"
+            <iframe src="${pageContext.request.contextPath }/quick/page"
                     style="width:100%;height:100%;border:0;"></iframe>
             <%--				这里显示公告栏、预警信息和代办事宜--%>
         </div>
@@ -243,9 +243,9 @@
                    lbx
                 </div>
             </td>
-            <td style="width: *;" class="co1"><span id="online"
+          <%--  <td style="width: *;" class="co1"><span id="online"
                                                     style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:1</span>
-            </td>
+            </td>--%>
         </tr>
         </tbody>
     </table>
