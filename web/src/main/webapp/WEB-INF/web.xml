@@ -72,10 +72,8 @@
     </servlet-mapping>
 
 
-    <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>webApp.root</param-value>
-    </context-param>
+
+
     <!--设置log4j的目录-->
     <listener>
         <listener-class>com.lbx.utils.log4jlistener</listener-class>
