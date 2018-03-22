@@ -25,7 +25,25 @@ public class MyTest {
 
     @Test
     public void fun1() {
-        List<String> stringList = baseOrderMapper.differentYear();
+        List<String> stringList = baseOrderMapper.getDifferentYear();
         System.out.println(stringList);
+    }
+
+    @Test
+    public void fun2() {
+        List<String> stringList = baseOrderMapper.getMonthByYear("2018");
+        System.out.println(stringList);
+    }
+
+    @Test
+    public void fun3() {
+        List<String> dayByYearAndMonth = baseOrderMapper.getDayByYearAndMonth("2018-03");
+        System.out.println(dayByYearAndMonth);
+    }
+
+    @Test
+    public void fun4() {
+        List<BaseOrder> baseOrderList = baseOrderMapper.getBaseOrderByYearAndMonthAndDay("2018-03-22");
+        System.out.println(baseOrderList);
     }
 }

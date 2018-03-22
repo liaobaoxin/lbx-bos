@@ -15,7 +15,7 @@
     var setting = {
         async: {
             enable: true,
-            url: "/ZTree/LoadTree",//异步加载时的请求地址
+            url: "/zTree/loadTree",//异步加载时的请求地址
             autoParam: ["id"],//提交参数
             type: 'get',
             dataType: 'json'
@@ -39,7 +39,7 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: '/json/menu1.json',
+            url: '/zTree/allNodes',
             type: 'get',
             dataType: 'json',
             success: function (data) {

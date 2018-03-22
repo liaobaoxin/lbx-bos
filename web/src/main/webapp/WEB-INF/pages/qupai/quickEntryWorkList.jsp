@@ -42,7 +42,7 @@
                 resizable: true,
                 closed: false,
                 cache: false,
-                href: '/quick/zTree',
+                href: '/zTree/page',
                 modal: true
             });
         }

@@ -14,9 +14,10 @@ public interface QuickService {
     /**
      * 查找5天内范围的数据
      * 按日期降序
+     *
      * @return
      */
-    PageBean findList(PageBean pageBean,String preDate,String sutDate,String keyWord);
+    PageBean findList(PageBean pageBean, String preDate, String sutDate, String keyWord);
 
     /**
      * 查找没有商品描述的数据
@@ -34,4 +35,14 @@ public interface QuickService {
     Integer updataById(BaseOrder baseOrder);
 
     Integer batchInsertOrder(List<BaseOrder> baseOrderList);
+
+    List<String> getDifferentYear();
+
+    List<String> getMonthByYear(String year);
+
+    List<String> getDayByYearAndMonth(String yearMonth);
+
+    List<BaseOrder> getBaseOrderByYearAndMonthAndDay(String yearMonthDay);
+
+
 }

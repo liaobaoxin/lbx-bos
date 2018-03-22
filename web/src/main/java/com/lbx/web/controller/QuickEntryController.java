@@ -179,10 +179,7 @@ public class QuickEntryController {
     }
 
 
-    @RequestMapping("/zTree")
-    public String zTree() {
-        return "qupai/zTree";
-    }
+
 
 
     /**

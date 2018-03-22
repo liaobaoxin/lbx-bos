@@ -103,4 +103,24 @@ public class QuickServiceImpl implements QuickService {
         }
         return null;
     }
+
+    @Override
+    public List<String> getDifferentYear() {
+        return baseOrderMapper.getDifferentYear();
+    }
+
+    @Override
+    public List<String> getMonthByYear(String year) {
+        return baseOrderMapper.getMonthByYear(year);
+    }
+
+    @Override
+    public List<String> getDayByYearAndMonth(String yearMonth) {
+        return baseOrderMapper.getDayByYearAndMonth(yearMonth);
+    }
+
+    @Override
+    public List<BaseOrder> getBaseOrderByYearAndMonthAndDay(String yearMonthDay) {
+        return baseOrderMapper.getBaseOrderByYearAndMonthAndDay(yearMonthDay);
+    }
 }
