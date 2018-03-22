@@ -118,7 +118,7 @@ public interface BaseOrderMapper {
      * @param yearMonth
      * @return
      */
-    @Select("SELECT DATE_FORMAT(add_time,'%d') FROM base_order WHERE is_delete='0' AND DATE_FORMAT(add_time,'%Y-%m')=#{yearMonth} GROUP BY add_time;")
+    @Select("SELECT DISTINCT DATE_FORMAT(add_time,'%d') FROM base_order WHERE is_delete='0' AND DATE_FORMAT(add_time,'%Y-%m')=#{yearMonth} GROUP BY add_time;")
     List<String> getDayByYearAndMonth(String yearMonth);
 
 

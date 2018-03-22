@@ -212,5 +212,12 @@ public class QuickEntryController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    @RequestMapping("/addShortMennsage")
+    @ResponseBody
+    public ResultData addShortMennsage(String ids){
+        System.out.println(ids);
+        return ResultData.ok();
+    }
+
 
 }

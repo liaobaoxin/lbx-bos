@@ -20,6 +20,8 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript"
+            src="${pageContext.request.contextPath }/js/easyui/easyloader.js"></script>
+    <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/easyui/ext/jquery.portal.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/easyui/ext/jquery.cookie.js"></script>
@@ -38,7 +40,7 @@
                 title: '短信',
                 width: 300,
                 height: 500,
-                buttons:'#bb',
+                buttons: '#bb',
                 resizable: true,
                 closed: false,
                 cache: false,
@@ -352,10 +354,37 @@
                     var rows = $('#grid').datagrid('getRows');
                     var row = rows[rowIndex];
                     $.post('/quick/update', row, function (data) {
-                        alert("一" + data);
                         updateRow = undefined;
                     })
 
+                }
+            });
+        }
+
+        function filter(node) {
+            if (node.level == 3) {
+                return node;
+            }
+        }
+
+
+        function ztreesave() {
+            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+            var nodes = treeObj.getNodesByFilter(filter);
+            var ids = new Array();
+            for (var i = 0; i < nodes.length; i++) {
+                ids.push(nodes[i].id);
+            }
+            var url = "/quick/addShortMennsage?ids=" + ids;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    if (JSON.parse(data).msg == "OK") {
+                        alert("添加成功");
+                        $('#shortMessage').window('close');
+                    }
                 }
             });
         }
@@ -369,7 +398,7 @@
     <div id="win"></div>
     <div id="shortMessage"></div>
     <div id="bb">
-        <a href="#" class="easyui-linkbutton">Save</a>
+        <a href="#" onclick="ztreesave()" id="ztree-save" class="easyui-linkbutton">确定</a>
         <a href="#" class="easyui-linkbutton">Close</a>
     </div>
 </div>
