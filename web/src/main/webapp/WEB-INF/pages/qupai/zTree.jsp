@@ -5,7 +5,6 @@
 <HEAD>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/ztree/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.3.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/ztree/jquery.ztree.all-3.5.js"></script>
 

@@ -4,7 +4,7 @@ package com.lbx.utils;
  * @Author: lbx
  * @date 2018/3/22 11:01
  */
-public class ZtreeJson implements Comparable<ZtreeJson > {
+public class ZtreeJson implements Comparable<ZtreeJson> {
     private String id;
     private String pId;
     private String name;

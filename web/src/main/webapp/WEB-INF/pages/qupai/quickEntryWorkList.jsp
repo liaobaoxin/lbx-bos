@@ -27,10 +27,14 @@
             src="${pageContext.request.contextPath }/js/easyui/ext/jquery.cookie.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
+    <%--    <script type="text/javascript"
+                src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>--%>
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/js/DateFormat.js"></script>
+
+    <script src="${pageContext.request.contextPath }/js/jquery.ui.widget.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery.iframe-transport.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery.fileupload.js"></script>
 
     <script type="text/javascript">
 
@@ -293,8 +297,24 @@
             }]];
 
         $(function () {
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                add: function (e, data) {
+                    data.context = $('<button/>').text('Upload')
+                        .appendTo(document.body)
+                        .click(function () {
+                            $(this).replaceWith($('<p/>').text('Uploading...'));
+                            data.submit();
+                        });
+                },
+                done: function (e, data) {
+                    data.context.text('Upload finished.');
+                }
+            });
+
             // 先将body隐藏，再显示，不会出现页面刷新效果
             $("body").css({visibility: "visible"});
+
 
             // 收派标准数据表格
             $('#grid').datagrid({
@@ -322,21 +342,24 @@
                     });
                 },
             });
-            $('#btn-upload').upload({
-                name: 'orderFile',  // <input name="file" />
-                action: '${pageContext.request.contextPath}/import',  // 提交请求action路径
-                enctype: 'multipart/form-data', // 编码格式
-                autoSubmit: true, // 选中文件提交表单
-                onComplete: function (response) {
-                    if (response == "success") {
-                        $.messager.alert("提示信息", "数据导入成功！", "info");
-                        $("#grid").datagrid("reload");
-                    } else {
-                        $.messager.alert("错误提示", response, "error");
-                    }
-                }// 请求完成时 调用函数
-            });
+
+
+            <%--/*/!* $('#btn-upload').upload({--%>
+            <%--name: 'orderFile',  // <input name="file" />--%>
+            <%--action: '${pageContext.request.contextPath}/import',  // 提交请求action路径--%>
+            <%--enctype: 'multipart/form-data', // 编码格式--%>
+            <%--autoSubmit: true, // 选中文件提交表单--%>
+            <%--onComplete: function (response) {--%>
+            <%--if (response == "success") {--%>
+            <%--$.messager.alert("提示信息", "数据导入成功！", "info");--%>
+            <%--$("#grid").datagrid("reload");--%>
+            <%--} else {--%>
+            <%--$.messager.alert("错误提示", response, "error");--%>
+            <%--}--%>
+            <%--}// 请求完成时 调用函数--%>
+            <%--});*!/*/--%>
         });
+
 
         function doDblClickCell(rowIndex, field, value) {
             if (updateRow != undefined) {
@@ -376,7 +399,6 @@
                 ids.push(nodes[i].id);
             }
             var url = "/quick/addShortMennsage?ids=" + ids;
-
             $.ajax({
                 type: "GET",
                 url: url,
@@ -384,6 +406,7 @@
                     if (JSON.parse(data).msg == "OK") {
                         alert("添加成功");
                         $('#shortMessage').window('close');
+
                     }
                 }
             });
@@ -418,10 +441,13 @@
                            onclick="doDelete();">删除</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
                            onclick="doExport();">导出</a>
-                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true"
                            onclick="shortMessage();">短信</a>
-                        <a id="btn-upload" href="#" class="easyui-linkbutton" style="display:block"
-                           data-options="iconCls:'icon-redo',plain:true">导入</a>
+                       <%-- <a href="#" id="btn-upload" class="easyui-linkbutton"
+                           data-options="iconCls:'icon-tip',plain:true">导入</a>--%>
+                        <%--<a id="btn-upload" class="easyui-linkbutton" style="display:block"
+                           <data-options="iconCls:'icon-redo'">导入</a>--%>
+
 
                     </div>
                     <%--分割线--%>
@@ -446,7 +472,10 @@
                         <input id="searchbox" class="easyui-searchbox" searcher="doSearch" prompt="请输入手机号码或者姓名或者快递单号"
                                style="width: 300px; margin-top: 10px; padding-top: 10px;"/>
                     </div>
+
+
                 </div>
+
             </td>
         </tr>
     </table>

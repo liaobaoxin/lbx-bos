@@ -52,6 +52,7 @@ public class ZtreeController {
                 ZtreeJson json = new ZtreeJson(id + "-" + month, id, month+"月", "true");
                 list.add(json);
             }
+            Collections.sort(list);
             return list;
         } else if (id.matches("^2[0-9]{3}-[0-9]{2}$")) {
             List<String> days = quickService.getDayByYearAndMonth(id);
@@ -60,6 +61,7 @@ public class ZtreeController {
                 ZtreeJson json = new ZtreeJson(id + "-" + day, id, day, "true");
                 list.add(json);
             }
+            Collections.sort(list);
             return list;
         }else if (id.matches("^2[0-9]{3}-[0-9]{2}-[0-9]{2}$")) {
             List<BaseOrder> baseOrderList = quickService.getBaseOrderByYearAndMonthAndDay(id);
@@ -68,6 +70,7 @@ public class ZtreeController {
                 ZtreeJson json = new ZtreeJson(baseOrder.getId()+"",baseOrder.getName(),"false");
                 list.add(json);
             }
+            Collections.sort(list);
             return list;
         }
         return null;
