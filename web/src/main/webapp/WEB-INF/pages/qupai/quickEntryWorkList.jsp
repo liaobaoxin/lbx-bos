@@ -83,28 +83,50 @@
         }
 
 
-        var editIndex;//全局变量
+        var addIndex;//添加标识
         var updateRow;
 
 
         function doAdd() {
-            if (editIndex != undefined) {
-                $("#grid").datagrid('endEdit', editIndex);
-            }
-            if (editIndex == undefined) {
+            if (addIndex == 0) {
+                $("#grid").datagrid('endEdit', 0);
+                var rowData = $("#grid").datagrid('getRows', 0);
+                $.post('/quick/add', rowData[0], function (data) {
+                    if (JSON.parse(data).msg == "OK") {
+                    } else {
+                        $.messager.alert("提示信息", "录入失败！", "error");
+                    }
+                });
                 //alert("快速添加电子单...");
                 $("#grid").datagrid('insertRow', {
                     index: 0,
                     row: {}
                 });
+
                 $("#grid").datagrid('beginEdit', 0);
-                editIndex = 0;
+                addIndex = 0;
+            } else if (addIndex == undefined) {
+                //alert("快速添加电子单...");
+                $("#grid").datagrid('insertRow', {
+                    index: 0,
+                    row: {}
+                });
+
+                $("#grid").datagrid('beginEdit', 0);
+                addIndex = 0;
             }
         }
 
         function doSave() {
-            if (editIndex != undefined) {
-                $("#grid").datagrid('endEdit', editIndex);
+            if (addIndex != undefined) {
+                $("#grid").datagrid('endEdit', addIndex);
+                var rowData = $("#grid").datagrid('getRows', 0);
+                $.post('/quick/add', rowData[0], function (data) {
+                    if (JSON.parse(data).msg == "OK") {
+                    } else {
+                        $.messager.alert("提示信息", "录入失败！", "error");
+                    }
+                });
             }
             if (updateRow != undefined) {
                 $('#grid').datagrid('endEdit', updateRow);
@@ -118,13 +140,13 @@
         }
 
         function doCancel() {
-            if (editIndex != undefined) {
+            if (addIndex != undefined) {
                 updateRow = undefined;
-                $("#grid").datagrid('cancelEdit', editIndex);
-                if ($('#grid').datagrid('getRows')[editIndex].id == undefined) {
-                    $("#grid").datagrid('deleteRow', editIndex);
+                $("#grid").datagrid('cancelEdit', addIndex);
+                if ($('#grid').datagrid('getRows')[addIndex].id == undefined) {
+                    $("#grid").datagrid('deleteRow', addIndex);
                 }
-                editIndex = undefined;
+                addIndex = undefined;
             }
         }
 
@@ -170,38 +192,6 @@
 
         }
 
-
-        //工具栏
-        var toolbar = [{
-            id: 'button-add',
-            text: '新增一行',
-            iconCls: 'icon-add',
-            handler: doAdd
-        }, {
-            id: 'button-cancel',
-            text: '取消编辑',
-            iconCls: 'icon-cancel',
-            handler: doCancel
-        }, {
-            id: 'button-delete',
-            text: '删除',
-            iconCls: 'icon-remove',
-            handler: doDelete
-        }, /*{
-            id: 'button-save',
-            text: '保存',
-            iconCls: 'icon-save',
-            handler: doSave
-        },*/ {
-            id: 'button-export',
-            text: '导出',
-            iconCls: 'icon-undo',
-            handler: doExport
-        }, {
-            id: 'btn-upload',
-            text: '批量导入',
-            iconCls: 'icon-redo'
-        }];
         // 定义列
         var columns = [[
             {
@@ -332,32 +322,8 @@
                 columns: columns,
                 onDblClickCell: doDblClickCell,
                 checkOnSelect: true,
-                onAfterEdit: function (rowIndex, rowData, changes) {
-                    console.info(rowData);
-                    editIndex = undefined;
-                    $.post('/quick/add', rowData, function (data) {
-                        if (data == '0') {
-                            $.messager.alert("提示信息", "录入失败！", "error");
-                        }
-                    });
-                },
+
             });
-
-
-            <%--/*/!* $('#btn-upload').upload({--%>
-            <%--name: 'orderFile',  // <input name="file" />--%>
-            <%--action: '${pageContext.request.contextPath}/import',  // 提交请求action路径--%>
-            <%--enctype: 'multipart/form-data', // 编码格式--%>
-            <%--autoSubmit: true, // 选中文件提交表单--%>
-            <%--onComplete: function (response) {--%>
-            <%--if (response == "success") {--%>
-            <%--$.messager.alert("提示信息", "数据导入成功！", "info");--%>
-            <%--$("#grid").datagrid("reload");--%>
-            <%--} else {--%>
-            <%--$.messager.alert("错误提示", response, "error");--%>
-            <%--}--%>
-            <%--}// 请求完成时 调用函数--%>
-            <%--});*!/*/--%>
         });
 
 
@@ -368,7 +334,7 @@
             }
             $('#grid').datagrid('beginEdit', rowIndex);
             var ed = $('#grid').datagrid('getEditor', {index: rowIndex, field: field});
-            editIndex = rowIndex;
+            addIndex = rowIndex;
             updateRow = rowIndex;
             $(ed.target).keydown(function (e) {
                 if (e.which == 13) {
@@ -443,10 +409,8 @@
                            onclick="doExport();">导出</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true"
                            onclick="shortMessage();">短信</a>
-                       <%-- <a href="#" id="btn-upload" class="easyui-linkbutton"
-                           data-options="iconCls:'icon-tip',plain:true">导入</a>--%>
-                        <%--<a id="btn-upload" class="easyui-linkbutton" style="display:block"
-                           <data-options="iconCls:'icon-redo'">导入</a>--%>
+                       <%-- <a id="btn-upload" class="easyui-linkbutton" style="display:block" onclick=""
+                           data-options="iconCls:'icon-redo'">导入</a>--%>
 
 
                     </div>
