@@ -183,12 +183,21 @@
                         type: "GET",
                         url: url,
                         success: function (data) {
-                            $('#grid').datagrid('reload'); // 刷新当前页数据
+                            if (JSON.parse(data).msg == "OK") {
+                                window.location.reload();
+                            } else {
+                                $.messager.alert("提示信息", "录入失败！", "error");
+                            }
                         }
+
                     });
+
+                } else {
+                    window.location.reload();
                 }
 
             });
+
 
         }
 
@@ -205,7 +214,8 @@
                 editor: {
                     type: 'validatebox',
                     options: {
-                        required: true
+                        required: true,
+                        validType: 'length[0,5]'
                     }
                 },
                 formatter: function (value, row, index) {
@@ -409,8 +419,8 @@
                            onclick="doExport();">导出</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true"
                            onclick="shortMessage();">短信</a>
-                       <%-- <a id="btn-upload" class="easyui-linkbutton" style="display:block" onclick=""
-                           data-options="iconCls:'icon-redo'">导入</a>--%>
+                        <%-- <a id="btn-upload" class="easyui-linkbutton" style="display:block" onclick=""
+                            data-options="iconCls:'icon-redo'">导入</a>--%>
 
 
                     </div>
