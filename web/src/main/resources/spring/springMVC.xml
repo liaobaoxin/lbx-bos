@@ -52,4 +52,17 @@
     <!-- 对静态资源文件的访问 -->
     <!--<mvc:resources mapping="/static/**" location="/static"/>-->
 
+
+    <!-- 解决SQL注入拦截器 -->
+    <bean id="SqlInjectInterceptor" class="com.lbx.web.Interceptor.SqlInjectInterceptor"></bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="SqlInjectInterceptor"  />
+            </list>
+        </property>
+    </bean>
+
+
 </beans>
