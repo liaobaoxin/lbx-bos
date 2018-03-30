@@ -388,6 +388,10 @@
             });
         }
 
+        function ztreeClose(){
+            $('#shortMessage').window('close');
+        }
+
 
     </script>
 </head>
@@ -398,7 +402,7 @@
     <div id="shortMessage"></div>
     <div id="bb">
         <a href="#" onclick="ztreesave()" id="ztree-save" class="easyui-linkbutton">确定</a>
-        <a href="#" class="easyui-linkbutton">Close</a>
+        <a href="#" class="easyui-linkbutton" onclick="ztreeClose()">关闭</a>
     </div>
 </div>
 <%--工具栏--%>
