@@ -50,21 +50,21 @@ public class SqlInjectInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-        // TODO Auto-generated method stub
-        if (arg0.getRequestURI().indexOf("CheckAcc") > -1) {
+
             Enumeration<String> names = arg0.getParameterNames();
             while (names.hasMoreElements()) {
                 String name = names.nextElement();
                 String[] values = arg0.getParameterValues(name);
                 for (String value : values) {
                     if (judgeXSS(value.toLowerCase())) {
+                        System.out.println("非法字符");
                         arg1.setContentType("text/html;charset=UTF-8");
                         arg1.getWriter().print("参数含有非法攻击字符,已禁止继续访问！");
                         return false;
                     }
                 }
             }
-        }
+
 
         return true;
     }
@@ -79,7 +79,7 @@ public class SqlInjectInterceptor implements HandlerInterceptor {
         if (value == null || "".equals(value)) {
             return false;
         }
-        String xssStr = "and|or|select|update|delete|drop|truncate|%20|=|-|--|;|'|%|#|+|,|//|/| |\\|!=|(|)";
+        String xssStr = "and|or|select|update|delete|drop|script|eval|truncate|%20|=|-|--|;|'|%|#|+|,|//|/| |\\|!=|(|)";
         String[] xssArr = xssStr.split("\\|");
         for (int i = 0; i < xssArr.length; i++) {
             if (value.indexOf(xssArr[i]) > -1) {
