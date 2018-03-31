@@ -179,9 +179,6 @@ public class QuickEntryController {
     }
 
 
-
-
-
     /**
      * 快递查询
      *
@@ -214,7 +211,7 @@ public class QuickEntryController {
 
     @RequestMapping("/addShortMennsage")
     @ResponseBody
-    public ResultData addShortMennsage(String ids){
+    public ResultData addShortMennsage(String ids) {
         System.out.println(ids);
         return ResultData.ok();
     }
