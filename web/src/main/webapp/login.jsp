@@ -193,5 +193,10 @@
 <script src="http://www.mycodes.net/js/youxia.js" type="text/javascript"></script>
 <script type="text/javascript" src="//idm-su.baidu.com/su.js"></script>
 
+<script   language="javascript">
+    if (top != window)
+        top.location.href = window.location.href;
+</script>
+
 </body>
 </html>

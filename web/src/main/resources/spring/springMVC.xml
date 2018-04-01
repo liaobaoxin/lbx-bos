@@ -86,9 +86,6 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
 
 
-    <!-- 全局异常处理器
-    只要你实现了HandlerExceptionResolver接口，这个
-    类就是一个全局异常处理器-->
-    <bean class="com.lbx.web.MyExection"></bean>
+
 
 </beans>
