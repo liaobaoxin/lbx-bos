@@ -32,21 +32,22 @@
     </mvc:annotation-driven>
 
     <!-- 配置包扫描器  限制只扫描Handle的注解@Controller和异常处理的注解@ControllerAdvice-->
-    <context:component-scan base-package="com.lbx.*" use-default-filters="false">
+    <context:component-scan base-package="com.lbx.*" use-default-filters="true">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.InitBinder"/>
+        <context:include-filter type="annotation"
+                                expression="org.apache.shiro.authz.annotation.RequiresPermissions"/>
     </context:component-scan>
-
 
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"></property>
-         <property name="suffix" value=".jsp"></property>
+        <property name="suffix" value=".jsp"></property>
     </bean>
 
     <!-- 对静态资源文件的访问 -->
@@ -59,10 +60,35 @@
         <!-- <bean class="com.bybo.aca.web.interceptor.Login"/> -->
         <mvc:interceptor>
             <!-- 进行拦截：/**表示拦截所有controller -->
-            <mvc:mapping path="/**" />
+            <mvc:mapping path="/**"/>
             <bean class="com.lbx.web.Interceptor.SqlInjectInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
+
+    <!--Shiro的注解授权是利有Spring的AOP实现的。
+    在程序启动时会自动扫描作了注解的Class，当发现注解时，
+    就自动注入授权代码实现。也就是说，要注入授权控制代码，
+    第一处必须要让框架要可以扫描找被注解的Class 。
+    而我们的Srping项目在ApplicationContext.xml中一般是不扫描Controller的，
+    所以也就无法让写在Controller中的注解授权生效了。
+    因此正确的作法是将这配置放到springmvc的配置文件中.这样Controller就可以通过注解授权了。
+    参考链接:https://blog.csdn.net/hezhipin610039/article/details/50610547
+    -->
+    <!-- 开启shiro框架注解支持 -->
+    <bean id="defaultAdvisorAutoProxyCreator"
+          class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+        <!-- 必须使用cglib方式为Action对象创建代理对象 -->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+    <!-- 配置shiro框架提供的切面类，用于创建代理对象 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
+
+
+    <!-- 全局异常处理器
+    只要你实现了HandlerExceptionResolver接口，这个
+    类就是一个全局异常处理器-->
+    <bean class="com.lbx.web.MyExection"></bean>
 
 </beans>

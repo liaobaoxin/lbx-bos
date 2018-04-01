@@ -3,12 +3,14 @@ package com.lbx.service.realm;
 import com.lbx.domain.TUser;
 import com.lbx.domain.TUserExample;
 import com.lbx.mapper.TUserMapper;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,11 @@ public class BosRealm extends AuthorizingRealm {
 
     //授权方法
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        info.addStringPermission("ztree-page");
+        TUser user1= (TUser) SecurityUtils.getSubject().getPrincipal();
+        TUser user2 = (TUser) principals.getPrimaryPrincipal();
+        System.out.println(user1==user2);
+        return info;
     }
 }

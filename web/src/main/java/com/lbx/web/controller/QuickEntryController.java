@@ -5,6 +5,7 @@ import com.lbx.service.QuickService;
 import com.lbx.utils.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -94,6 +95,7 @@ public class QuickEntryController {
      * @return
      * @throws IOException
      */
+    @RequiresPermissions("quick-export")
     @RequestMapping("/export")
     public void exportXls(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //第一步：查询所有未有订单号的数据

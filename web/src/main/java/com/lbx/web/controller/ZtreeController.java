@@ -3,6 +3,7 @@ package com.lbx.web.controller;
 import com.lbx.domain.BaseOrder;
 import com.lbx.service.QuickService;
 import com.lbx.utils.ZtreeJson;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class ZtreeController {
 
     @Autowired
     QuickService quickService;
+
 
     @RequestMapping("/page")
     public String page() {

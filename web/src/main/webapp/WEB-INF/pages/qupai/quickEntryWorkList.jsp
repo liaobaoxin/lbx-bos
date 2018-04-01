@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -419,10 +420,15 @@
                            onclick="doCancel();">取消编辑</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
                            onclick="doDelete();">删除</a>
+                        <shiro:hasPermission name="quick-export">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
                            onclick="doExport();">导出</a>
+                        </shiro:hasPermission>
+
+                        <shiro:hasPermission name="ztree-page">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true"
                            onclick="shortMessage();">短信</a>
+                        </shiro:hasPermission>
                         <%-- <a id="btn-upload" class="easyui-linkbutton" style="display:block" onclick=""
                             data-options="iconCls:'icon-redo'">导入</a>--%>
 
