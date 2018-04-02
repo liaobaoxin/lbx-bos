@@ -76,6 +76,7 @@
                             title: '编号',
                             width: 200,
                             checkbox: true
+
                         },
                         {
                             field: 'name',

@@ -5,7 +5,8 @@
 		{ "id":"112", "pId":"0", "name":"订单管理",  "page":"quick/page"},
 		{ "id":"113", "pId":"1", "name":"数据源监控","page":"druid/"},
 		{ "id":"1003", "pId":"1", "name":"权限管理", "page":"authManage/page"},
-		{ "id":"1004", "pId":"1", "name":"角色管理", "page":"roleManage/page"}
+		{ "id":"1004", "pId":"1", "name":"角色管理", "page":"roleManage/page"},
+		{ "id":"1005", "pId":"1", "name":"用户管理", "page":"user/page"}
 
 	/*{ "id":"114", "pId":"11", "name":"管理分区", "page":"page_base_subarea.action"},
     { "id":"115", "pId":"11", "name":"管理定区/调度排班","page":"page_base_decidedzone.action"},*/

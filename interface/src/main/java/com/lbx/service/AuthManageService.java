@@ -16,5 +16,7 @@ public interface AuthManageService {
 
     PageBean findAll(PageBean pageBean);
 
+    List<AuthFunction> findAll();
+
     Integer delete(String id);
 }

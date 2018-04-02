@@ -45,7 +45,7 @@ public class AuthManageServiceImpl implements AuthManageService {
 
     @Override
     public PageBean findAll(PageBean pageBean) {
-        PageHelper.offsetPage(pageBean.getPage(),pageBean.getRows());
+        PageHelper.offsetPage(pageBean.getPage(), pageBean.getRows());
 
         AuthFunctionExample example = new AuthFunctionExample();
         List<AuthFunction> authFunctionList = authFunctionMapper.selectByExample(example);
@@ -59,8 +59,14 @@ public class AuthManageServiceImpl implements AuthManageService {
     }
 
     @Override
+    public List<AuthFunction> findAll() {
+        AuthFunctionExample example = new AuthFunctionExample();
+        return authFunctionMapper.selectByExample(example);
+    }
+
+    @Override
     public Integer delete(String id) {
-        return  authFunctionMapper.deleteByPrimaryKey(id);
+        return authFunctionMapper.deleteByPrimaryKey(id);
 
     }
 }

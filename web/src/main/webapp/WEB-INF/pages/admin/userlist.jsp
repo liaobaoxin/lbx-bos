@@ -99,7 +99,7 @@
                 rownumbers : true,
                 striped : true,
                 toolbar : toolbar,
-                url : "userAction_pageQuery.action",
+                url : "/json/users.json",
                 idField : 'id',
                 frozenColumns : frozenColumns,
                 columns : columns,
@@ -121,7 +121,7 @@
         }
 
         function doAdd() {
-            location.href="${pageContext.request.contextPath}/page_admin_userinfo.action";
+            location.href="${pageContext.request.contextPath}/user/addPage";
         }
 
         function doView() {
