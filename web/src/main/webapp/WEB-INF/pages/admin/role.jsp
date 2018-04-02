@@ -43,11 +43,14 @@
 					text : '添加角色',
 					iconCls : 'icon-add',
 					handler : function(){
-						location.href='${pageContext.request.contextPath}/page_admin_role_add.action';
+						location.href='${pageContext.request.contextPath}/roleManage/addPage';
 					}
 				}           
 			],
-			url : '',
+            url : '/roleManage/list',
+            fit: true,
+            pageList: [30, 50, 100],
+            pagination: true,
 			columns : [[
 				{
 					field : 'id',
