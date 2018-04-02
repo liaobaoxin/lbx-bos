@@ -84,14 +84,16 @@
 					<script type="text/javascript">
                         $(function(){
                             //页面加载完成后，发送ajax请求，获取所有的角色数据
-                            $.post('/roleManage/list',function(data){
+                            $.post('/roleManage/findAll',function(data){
+                                alert(data.length);
                                 //在ajax回调函数中，解析json数据，展示为checkbox
                                 for(var i=0;i<data.length;i++){
                                     var id = data[i].id;
                                     var name = data[i].name;
+
                                     $("#roleTD").append('<input id="'+id+'" type="checkbox" name="roleIds" value="'+id+'"><label for="'+id+'">'+name+'</label>');
                                 }
-                            });
+                            },"json");
                         });
 					</script>
 				</td>

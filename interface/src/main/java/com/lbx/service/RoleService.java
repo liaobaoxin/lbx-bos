@@ -12,4 +12,6 @@ public interface RoleService {
     List<AuthRole> findAll(PageBean pageBean);
 
     Integer insert(AuthRole authRole,String functionIds);
+
+    List<AuthRole> findAll();
 }

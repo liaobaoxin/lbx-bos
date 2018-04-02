@@ -10,6 +10,7 @@ import com.lbx.utils.ZtreeJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.management.relation.Role;
@@ -48,6 +49,15 @@ public class RoleController {
         roleService.findAll(pageBean);
         return ResultData.pageData(pageBean.getTotal(), pageBean.getRowList());
     }
+
+
+    @RequestMapping(value="/findAll",method= RequestMethod.POST,produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public List<AuthRole> findAll() {
+        List<AuthRole> list = roleService.findAll();
+        return list;
+    }
+
 
     @RequestMapping("/auth")
     @ResponseBody

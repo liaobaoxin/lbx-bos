@@ -29,8 +29,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<AuthRole> findAll(PageBean pageBean) {
-        PageHelper.offsetPage(pageBean.getPage(),pageBean.getRows());
-        AuthRoleExample example=new AuthRoleExample();
+        PageHelper.offsetPage(pageBean.getPage(), pageBean.getRows());
+        AuthRoleExample example = new AuthRoleExample();
         List<AuthRole> authRoleList = authRoleMapper.selectByExample(example);
 
 
@@ -43,15 +43,22 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Integer insert(AuthRole authRole,String functionIds) {
+    public Integer insert(AuthRole authRole, String functionIds) {
         int r = authRoleMapper.insert(authRole);
 
         String[] ids = functionIds.split(",");
-        for(String functionId:ids){
-            roleFunctionMapper.insert(new RoleFunctionKey(authRole.getId(),functionId));
+        for (String functionId : ids) {
+            roleFunctionMapper.insert(new RoleFunctionKey(authRole.getId(), functionId));
         }
 
 
         return r;
+    }
+
+    @Override
+    public List<AuthRole> findAll() {
+        AuthRoleExample example = new AuthRoleExample();
+        List<AuthRole> authRoleList = authRoleMapper.selectByExample(example);
+        return authRoleList;
     }
 }
