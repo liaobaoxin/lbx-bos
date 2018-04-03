@@ -5,6 +5,11 @@ public class UserRoleKey {
 
     private String roleId;
 
+    public UserRoleKey(String userId, String roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
+
     public String getUserId() {
         return userId;
     }
