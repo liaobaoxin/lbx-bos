@@ -5,9 +5,11 @@ import com.lbx.service.AuthManageService;
 import com.lbx.utils.PageBean;
 import com.lbx.utils.ResultData;
 import com.lbx.utils.SuperFunction;
+import com.lbx.utils.ZtreeJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +88,18 @@ public class AuthManageController {
     public ResultData delete(String id) {
         Integer r=authManageService.delete(id);
         return ResultData.ok();
+    }
+
+
+    @RequestMapping(value = "/roleId",method= RequestMethod.GET,produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public List<ZtreeJson> roleId(String roleId){
+        List<AuthFunction> authFunctionList = authManageService.findByRoleId(roleId);
+        List<ZtreeJson> list = new LinkedList<>();
+        for (AuthFunction AuthFunction : authFunctionList) {
+            list.add(new ZtreeJson(AuthFunction.getId(), AuthFunction.getPid(), AuthFunction.getName(), AuthFunction.getPid() == null ? "true" : "false"));
+        }
+        return list;
     }
 
 

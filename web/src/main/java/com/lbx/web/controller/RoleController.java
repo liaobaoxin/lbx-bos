@@ -1,5 +1,6 @@
 package com.lbx.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.lbx.domain.AuthFunction;
 import com.lbx.domain.AuthRole;
 import com.lbx.service.AuthManageService;
@@ -50,7 +51,7 @@ public class RoleController {
     }
 
 
-    @RequestMapping(value="/findAll",method= RequestMethod.POST,produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/findAll", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public List<AuthRole> findAll() {
         List<AuthRole> list = roleService.findAll();
@@ -70,17 +71,41 @@ public class RoleController {
     }
 
     @RequestMapping("/addRole")
-    public String addRole(AuthRole authRole,String functionIds) {
-        roleService.insert(authRole,functionIds);
+    public String addRole(AuthRole authRole, String functionIds) {
+        roleService.insert(authRole, functionIds);
         return "admin/role";
     }
 
-    @RequestMapping("/editRole")
-    public ModelAndView editRole(String id,ModelAndView modelAndView) {
+    @RequestMapping("/editRolePage")
+    public ModelAndView editRolePage(String id, ModelAndView modelAndView) {
         AuthRole role = roleService.findById(id);
+
+
+        List<AuthFunction> authFunctionList = authManageService.findByRoleId(id);
+        List<ZtreeJson> list = new LinkedList<>();
+        for (AuthFunction AuthFunction : authFunctionList) {
+            if (AuthFunction.getPid() != null) {
+                list.add(new ZtreeJson(AuthFunction.getId(), AuthFunction.getPid(), AuthFunction.getName(), AuthFunction.getPid() == null ? "true" : "false"));
+            }
+        }
+
         modelAndView.setViewName("/admin/role_edit");
-        modelAndView.addObject("role",role);
+        modelAndView.addObject("role", role);
+        modelAndView.addObject("checkJson", JSON.toJSONString(list));
+
         return modelAndView;
+    }
+
+    @RequestMapping("/editRole")
+    public String editRole(AuthRole authRole, String functionIds) {
+        roleService.update(authRole, functionIds);
+        return "admin/role";
+    }
+
+    @RequestMapping("/deleteRole")
+    public String deleteRole(String id) {
+        roleService.delete(id);
+        return "admin/role";
     }
 
 

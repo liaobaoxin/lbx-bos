@@ -10,6 +10,10 @@ public class RoleFunctionKey {
         this.functionId = functionId;
     }
 
+    public RoleFunctionKey(String roleId) {
+        this.roleId = roleId;
+    }
+
     public RoleFunctionKey() {
     }
 

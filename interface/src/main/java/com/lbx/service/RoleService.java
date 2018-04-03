@@ -16,4 +16,8 @@ public interface RoleService {
     List<AuthRole> findAll();
 
     AuthRole findById(String id);
+
+    Integer update(AuthRole authRole, String functionIds);
+
+    Integer delete(String id);
 }

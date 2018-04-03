@@ -55,7 +55,26 @@
                             if (row == null || row == undefined) {
                                 $.messager.alert('警告', '请选择一行记录', 'warning');
                             } else {
-                                location.href = '${pageContext.request.contextPath}/roleManage/editRole?id=' + row.id;
+                                location.href = '${pageContext.request.contextPath}/roleManage/editRolePage?id=' + row.id;
+                            }
+                        }
+                    },
+
+                    {
+                        id: 'delete',
+                        text: '删除角色',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            var row = $("#grid").datagrid('getSelected');
+                            if (row == null || row == undefined) {
+                                $.messager.alert('警告', '请选择一行记录', 'warning');
+                            } else {
+                                $.messager.confirm('Confirm', '你确定要删除吗？', function (r) {
+                                    if (r) {
+                                        location.href = '${pageContext.request.contextPath}/roleManage/deleteRole?id=' + row.id;
+                                    }
+                                });
+
                             }
                         }
                     }

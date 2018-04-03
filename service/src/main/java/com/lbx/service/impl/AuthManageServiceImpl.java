@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lbx.domain.AuthFunction;
 import com.lbx.domain.AuthFunctionExample;
+import com.lbx.domain.AuthRole;
 import com.lbx.mapper.AuthFunctionMapper;
 import com.lbx.service.AuthManageService;
 import com.lbx.utils.PageBean;
@@ -67,6 +68,11 @@ public class AuthManageServiceImpl implements AuthManageService {
     @Override
     public Integer delete(String id) {
         return authFunctionMapper.deleteByPrimaryKey(id);
-
     }
+
+    @Override
+    public List<AuthFunction> findByRoleId(String roleId) {
+        return authFunctionMapper.findByRoleId(roleId);
+    }
+
 }

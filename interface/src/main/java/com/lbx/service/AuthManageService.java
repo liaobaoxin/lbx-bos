@@ -19,4 +19,7 @@ public interface AuthManageService {
     List<AuthFunction> findAll();
 
     Integer delete(String id);
+
+    List<AuthFunction>  findByRoleId(String roleId);
+
 }
