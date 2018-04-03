@@ -12,9 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.relation.Role;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,6 +73,14 @@ public class RoleController {
     public String addRole(AuthRole authRole,String functionIds) {
         roleService.insert(authRole,functionIds);
         return "admin/role";
+    }
+
+    @RequestMapping("/editRole")
+    public ModelAndView editRole(String id,ModelAndView modelAndView) {
+        AuthRole role = roleService.findById(id);
+        modelAndView.setViewName("/admin/role_edit");
+        modelAndView.addObject("role",role);
+        return modelAndView;
     }
 
 

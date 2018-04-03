@@ -14,4 +14,6 @@ public interface RoleService {
     Integer insert(AuthRole authRole,String functionIds);
 
     List<AuthRole> findAll();
+
+    AuthRole findById(String id);
 }
