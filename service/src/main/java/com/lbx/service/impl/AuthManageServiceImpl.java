@@ -2,6 +2,7 @@ package com.lbx.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.StringUtil;
 import com.lbx.domain.AuthFunction;
 import com.lbx.domain.AuthFunctionExample;
 import com.lbx.domain.AuthRole;
@@ -41,6 +42,9 @@ public class AuthManageServiceImpl implements AuthManageService {
 
     @Override
     public Integer insert(AuthFunction authFunction) {
+        if(StringUtil.isEmpty(authFunction.getPid())){
+            authFunction.setPid(null);
+        }
         return authFunctionMapper.insert(authFunction);
     }
 
@@ -62,6 +66,11 @@ public class AuthManageServiceImpl implements AuthManageService {
     @Override
     public List<AuthFunction> findAll() {
         AuthFunctionExample example = new AuthFunctionExample();
+        return authFunctionMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<AuthFunction> findAll(AuthFunctionExample example) {
         return authFunctionMapper.selectByExample(example);
     }
 
@@ -89,6 +98,11 @@ public class AuthManageServiceImpl implements AuthManageService {
     @Override
     public List<String> findAllFlag() {
         return authFunctionMapper.findAllFlag();
+    }
+
+    @Override
+    public List<AuthFunction> findMenuByUserId(String userId) {
+        return authFunctionMapper.findMenuByUserId(userId);
     }
 
 }

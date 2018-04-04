@@ -58,7 +58,7 @@
             <tr>
                 <td width="200">授权标识符</td>
                 <td>
-                    <input type="text" name="code" class="easyui-validatebox" data-options="required:true"/>
+                    <input type="text" name="code" class="easyui-validatebox"/>
                 </td>
             </tr>
             <tr>
@@ -77,14 +77,14 @@
             <tr>
                 <td>排序字段</td>
                 <td>
-                    <input type="text" name="zindex" class="easyui-numberbox" />
+                    <input type="text" name="zindex" class="easyui-numberbox"/>
                 </td>
             </tr>
             <tr>
                 <td>上级功能</td>
                 <td>
-                    <select id="cc"  name="pid"  class="easyui-combotree" style="width:200px;"
-                            data-options="url:'/authManage/superFunction',required:true"></select>
+                    <select id="cc" name="pid" class="easyui-combotree" style="width:200px;"
+                            data-options="url:'/authManage/superFunction'"></select>
                 </td>
             </tr>
             <tr>

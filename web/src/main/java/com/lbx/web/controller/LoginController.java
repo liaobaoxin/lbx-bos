@@ -6,6 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  **/
 @Controller
 public class LoginController {
+
+    private org.slf4j.Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, String name, String password) {
@@ -37,4 +40,18 @@ public class LoginController {
         }
         return "redirect/login.jsp";
     }
+
+    @RequestMapping("/logout")
+    public void logout(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        TUser user = (TUser) subject.getPrincipal();
+        if (subject.isAuthenticated()) {
+            subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+            if (logger.isDebugEnabled()) {
+                logger.debug("用户" + user.getUsername() + "退出登录");
+            }
+        }
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+    }
+
 }

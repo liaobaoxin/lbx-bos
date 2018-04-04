@@ -9,6 +9,15 @@
 
     <!-- 告知springMVC，启用springmvc的注解驱动 -->
     <mvc:annotation-driven/>
+    <!--<mvc:annotation-driven>-->
+    <!--<mvc:argument-resolvers>-->
+    <!--&lt;!&ndash;将空字符串转为NULL&ndash;&gt;-->
+    <!--<bean class="com.lbx.web.paramHandler.EmptyStringToNullModelAttributeMethodProcessor">-->
+    <!--<constructor-arg name="annotationNotRequired" value="true"/>-->
+    <!--</bean>-->
+    <!--</mvc:argument-resolvers>-->
+    <!--</mvc:annotation-driven>-->
+
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -84,8 +93,6 @@
 
     <!-- 配置shiro框架提供的切面类，用于创建代理对象 -->
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
-
-
 
 
 </beans>

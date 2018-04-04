@@ -1,6 +1,7 @@
 package com.lbx.service;
 
 import com.lbx.domain.AuthFunction;
+import com.lbx.domain.AuthFunctionExample;
 import com.lbx.utils.PageBean;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface AuthManageService {
 
     List<AuthFunction> findAll();
 
+    List<AuthFunction> findAll(AuthFunctionExample example);
+
     Integer delete(String id);
 
     List<AuthFunction>  findByRoleId(String roleId);
@@ -25,4 +28,6 @@ public interface AuthManageService {
     List<String> findFlagByUserId(String userId);
 
     List<String> findAllFlag();
+
+    List<AuthFunction> findMenuByUserId(String userId);
 }

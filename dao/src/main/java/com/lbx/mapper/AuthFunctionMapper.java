@@ -51,7 +51,7 @@ public interface AuthFunctionMapper {
             "    ON ar.id=rf.role_id  " +
             "INNER JOIN auth_function AS af" +
             "    ON rf.function_id = af.id" +
-            "WHERE u.id=#{userId}")
+            "  WHERE u.id=#{userId} ")
     List<String> findFlagByUserId(String userId);
 
     /**
@@ -70,4 +70,22 @@ public interface AuthFunctionMapper {
             "  INNER JOIN auth_function AS af" +
             "    ON rf.function_id = af.id")
     List<String> findAllFlag();
+
+    /**
+     * 根据用户ID查找菜单
+     */
+    @Select("SELECT   " +
+            "   af.id,af.pid,af.generatemenu,af.name " +
+            "FROM  " +
+            "  t_user AS u  " +
+            "  INNER JOIN user_role AS ur  " +
+            "    ON u.id = ur.user_id  " +
+            "  INNER JOIN auth_role AS ar  " +
+            "    ON ur.role_id = ar.id  " +
+            "  INNER JOIN role_function AS rf  " +
+            "    ON ar.id = rf.role_id  " +
+            "  INNER JOIN auth_function AS af  " +
+            "    ON rf.function_id = af.id  " +
+            "    WHERE u.id=#{userId} AND af.generatemenu='1' ORDER BY af.zindex ASC")
+    List<AuthFunction> findMenuByUserId(String userId);
 }

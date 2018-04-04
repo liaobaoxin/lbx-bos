@@ -9,47 +9,15 @@ public class ZtreeJson implements Comparable<ZtreeJson> {
     private String pId;
     private String name;
     private String IsParent;
+    private String page;
 
-    public String getId() {
-        return id;
+    public ZtreeJson() {
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getpId() {
-        return pId;
-    }
-
-    public void setpId(String pId) {
-        this.pId = pId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIsParent() {
-        return IsParent;
-    }
-
-    public void setIsParent(String isParent) {
-        IsParent = isParent;
-    }
-
 
     public ZtreeJson(String id, String name, String isParent) {
         this.id = id;
         this.name = name;
         IsParent = isParent;
-    }
-
-    public ZtreeJson() {
     }
 
     public ZtreeJson(String id, String pId, String name, String isParent) {
@@ -59,9 +27,50 @@ public class ZtreeJson implements Comparable<ZtreeJson> {
         IsParent = isParent;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public ZtreeJson setId(String id) {
+        this.id = id;
+        return this;
+    }
 
+    public String getpId() {
+        return pId;
+    }
 
+    public ZtreeJson setpId(String pId) {
+        this.pId = pId;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ZtreeJson setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getIsParent() {
+        return IsParent;
+    }
+
+    public ZtreeJson setIsParent(String isParent) {
+        IsParent = isParent;
+        return this;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public ZtreeJson setPage(String page) {
+        this.page = page;
+        return this;
+    }
 
     @Override
     public int compareTo(ZtreeJson o) {

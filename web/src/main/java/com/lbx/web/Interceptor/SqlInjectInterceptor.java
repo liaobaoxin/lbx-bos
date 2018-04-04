@@ -79,7 +79,7 @@ public class SqlInjectInterceptor implements HandlerInterceptor {
         if (value == null || "".equals(value)) {
             return false;
         }
-        String xssStr = "and|or|select|update|delete|drop|script|eval|truncate|%20|=|--|;|'|%|#|+|//|/| |\\|!=|(|)";
+        String xssStr = "and|or|select|update|delete|drop|script|eval|truncate|%20|=|;|'|%|#|+|\\|!=|(|)";
         String[] xssArr = xssStr.split("\\|");
         for (int i = 0; i < xssArr.length; i++) {
             if (value.indexOf(xssArr[i]) > -1) {

@@ -114,6 +114,8 @@
       #{zindex,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lbx.domain.AuthFunction" >
+
+
     insert into auth_function
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

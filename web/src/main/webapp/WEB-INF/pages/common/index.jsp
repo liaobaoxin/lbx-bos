@@ -43,7 +43,7 @@
 
             // 基本功能菜单加载
             $.ajax({
-                url: '${pageContext.request.contextPath}/json/menu.json',
+                url: '${pageContext.request.contextPath}/user/menu',
                 type: 'POST',
                 dataType: 'text',
                 success: function (data) {
@@ -169,7 +169,7 @@
             $.messager
                 .confirm('系统提示', '您确定要退出本次登录吗?', function (isConfirm) {
                     if (isConfirm) {
-                        location.href = '${pageContext.request.contextPath}/userAction_logout.action';
+                        location.href = '${pageContext.request.contextPath}/logout';
                     }
                 });
         }
