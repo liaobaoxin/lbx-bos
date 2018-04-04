@@ -414,12 +414,16 @@
                 <%--正常的设备列表--%>
                 <div id="normal">
                     <div style="float: left; padding: 0px; height: auto">
+                        <shiro:hasPermission name="quick-add">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
                            onclick="doAdd();">增加一行</a>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true"
                            onclick="doCancel();">取消编辑</a>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="quick-remove">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
                            onclick="doDelete();">删除</a>
+                        </shiro:hasPermission>
                         <shiro:hasPermission name="quick-export">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
                            onclick="doExport();">导出</a>
@@ -438,15 +442,18 @@
                     <div id="separator" style="float: left;" class="datagrid-btn-separator">
                     </div>
                     <div style="float: left; padding: 0px; height: auto">
+                        <shiro:hasPermission name="quick-save">
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
                            onclick="doSave();">保存</a>
+                        </shiro:hasPermission>
                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
                            onclick="refresh();">刷新</a>
-
+                        <shiro:hasPermission name="quick-list">
                         订单日期 <input id="preDate" class="easyui-datebox"
                                     style="width:150px;">
                         &nbsp; 至 &nbsp;&nbsp;<input class="easyui-datebox" id="sutDate"
                                                     style="width:150px;">
+
                     </div>
 
 
@@ -456,7 +463,7 @@
                         <input id="searchbox" class="easyui-searchbox" searcher="doSearch" prompt="请输入手机号码或者姓名或者快递单号"
                                style="width: 300px; margin-top: 10px; padding-top: 10px;"/>
                     </div>
-
+                    </shiro:hasPermission>
 
                 </div>
 

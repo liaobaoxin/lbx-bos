@@ -40,7 +40,7 @@ public interface AuthFunctionMapper {
      * 根据用户id查找shiro标识
      */
     @Select("SELECT " +
-            "  af.name " +
+            "  af.code " +
             "FROM" +
             "  t_user AS u " +
             "  INNER JOIN user_role AS ur " +
@@ -58,7 +58,7 @@ public interface AuthFunctionMapper {
      * 查找全部权限
      */
     @Select("SELECT " +
-            "  af.name " +
+            "  af.code " +
             "FROM" +
             "  t_user AS u " +
             "  INNER JOIN user_role AS ur " +

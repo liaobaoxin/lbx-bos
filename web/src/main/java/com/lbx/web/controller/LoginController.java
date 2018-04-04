@@ -21,6 +21,7 @@ public class LoginController {
 
     private org.slf4j.Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, String name, String password) {
         if (StringUtil.isNotEmpty(name) && StringUtil.isNotEmpty(password)) {
@@ -42,7 +43,7 @@ public class LoginController {
     }
 
     @RequestMapping("/logout")
-    public void logout(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Subject subject = SecurityUtils.getSubject();
         TUser user = (TUser) subject.getPrincipal();
         if (subject.isAuthenticated()) {
@@ -53,5 +54,11 @@ public class LoginController {
         }
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
+
+
+
+
+
+
 
 }

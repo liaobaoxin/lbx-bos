@@ -38,6 +38,7 @@
         <!--注入URL拦截规则 -->
         <property name="filterChainDefinitions">
             <value>
+                /test/**=anon
                 /unauthorized.jsp*=anon
                 /login/**=anon
                 /login.jsp = anon

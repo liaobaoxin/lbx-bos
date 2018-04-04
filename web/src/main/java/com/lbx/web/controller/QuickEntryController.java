@@ -52,6 +52,7 @@ public class QuickEntryController {
     /**
      * 快速录入工作单页面
      */
+    @RequiresPermissions("quick-list")
     @RequestMapping("/page")
     public String page() {
         return "qupai/quickEntryWorkList";
@@ -60,6 +61,7 @@ public class QuickEntryController {
     /**
      * 录入信息
      */
+    @RequiresPermissions("quick-save")
     @RequestMapping("/add")
     @ResponseBody
     public ResultData entrySheet(BaseOrder baseOrder) {
@@ -70,6 +72,7 @@ public class QuickEntryController {
     /**
      * 查看工作录入单信息
      */
+    @RequiresPermissions("quick-list")
     @RequestMapping("/list")
     @ResponseBody
     public ResultData list(PageBean pageBean, String preDate, String sutDate, String keyWord) {
@@ -79,8 +82,9 @@ public class QuickEntryController {
     }
 
     /**
-     * 查看工作录入单信息
+     * 删除工作录入单信息
      */
+    @RequiresPermissions("quick-remove")
     @RequestMapping("/delete")
     @ResponseBody
     public ResultData delete(String ids) {
@@ -210,6 +214,7 @@ public class QuickEntryController {
         //true:允许输入空值，false:不能为空值
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
 
     @RequestMapping("/addShortMennsage")
     @ResponseBody

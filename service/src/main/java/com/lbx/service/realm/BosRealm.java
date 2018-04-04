@@ -1,5 +1,6 @@
 package com.lbx.service.realm;
 
+import com.github.pagehelper.StringUtil;
 import com.lbx.domain.TUser;
 import com.lbx.domain.TUserExample;
 import com.lbx.mapper.TUserMapper;
@@ -68,7 +69,9 @@ public class BosRealm extends AuthorizingRealm {
 
         List<String> flagList = authManageService.findFlagByUserId(user.getId());
         for (String flag : flagList) {
-            info.addStringPermission(flag);
+            if (StringUtil.isNotEmpty(flag)) {
+                info.addStringPermission(flag);
+            }
         }
         return info;
 
