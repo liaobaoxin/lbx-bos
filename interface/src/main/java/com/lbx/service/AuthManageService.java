@@ -22,4 +22,7 @@ public interface AuthManageService {
 
     List<AuthFunction>  findByRoleId(String roleId);
 
+    List<String> findFlagByUserId(String userId);
+
+    List<String> findAllFlag();
 }

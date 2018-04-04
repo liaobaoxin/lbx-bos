@@ -34,5 +34,40 @@ public interface AuthFunctionMapper {
      * 根据角色Id查找权限
      */
     @Select("SELECT * FROM auth_function WHERE id IN (SELECT function_id FROM role_function WHERE role_id = #{roleId})")
-    List<AuthFunction>  findByRoleId(String roleId);
+    List<AuthFunction> findByRoleId(String roleId);
+
+    /**
+     * 根据用户id查找shiro标识
+     */
+    @Select("SELECT " +
+            "  af.name " +
+            "FROM" +
+            "  t_user AS u " +
+            "  INNER JOIN user_role AS ur " +
+            "    ON u.id = ur.user_id " +
+            "  INNER JOIN auth_role AS ar " +
+            "    ON ur.role_id = ar.id " +
+            "  INNER JOIN role_function AS rf " +
+            "    ON ar.id=rf.role_id  " +
+            "INNER JOIN auth_function AS af" +
+            "    ON rf.function_id = af.id" +
+            "WHERE u.id=#{userId}")
+    List<String> findFlagByUserId(String userId);
+
+    /**
+     * 查找全部权限
+     */
+    @Select("SELECT " +
+            "  af.name " +
+            "FROM" +
+            "  t_user AS u " +
+            "  INNER JOIN user_role AS ur " +
+            "    ON u.id = ur.user_id " +
+            "  INNER JOIN auth_role AS ar " +
+            "    ON ur.role_id = ar.id " +
+            "  INNER JOIN role_function AS rf " +
+            "    ON ar.id=rf.role_id  " +
+            "  INNER JOIN auth_function AS af" +
+            "    ON rf.function_id = af.id")
+    List<String> findAllFlag();
 }

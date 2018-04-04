@@ -75,4 +75,20 @@ public class AuthManageServiceImpl implements AuthManageService {
         return authFunctionMapper.findByRoleId(roleId);
     }
 
+
+    /**
+     * 根据userId查找shiro标识
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<String> findFlagByUserId(String userId) {
+        return authFunctionMapper.findFlagByUserId(userId);
+    }
+
+    @Override
+    public List<String> findAllFlag() {
+        return authFunctionMapper.findAllFlag();
+    }
+
 }
