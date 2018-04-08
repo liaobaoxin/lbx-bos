@@ -1,8 +1,8 @@
 /*
 SQLyog v10.2 
-MySQL - 5.1.73 : Database - bos
+MySQL - 5.6.26 : Database - bos
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -21,22 +21,20 @@ USE `bos`;
 DROP TABLE IF EXISTS `auth_function`;
 
 CREATE TABLE `auth_function` (
-  `id` varchar(40) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL COMMENT 'shiro授权标识',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
-  `page` varchar(255) DEFAULT NULL COMMENT '链接',
-  `generatemenu` tinyint(1) NOT NULL COMMENT '是否生成菜单',
-  `zindex` int(11) DEFAULT NULL COMMENT '排序ID',
-  `pid` varchar(32) DEFAULT NULL COMMENT '父ID',
-  PRIMARY KEY (`id`),
-  KEY `FK33r6np87v1p6gge7t6rpcao5h` (`pid`),
-  CONSTRAINT `FK33r6np87v1p6gge7t6rpcao5h` FOREIGN KEY (`pid`) REFERENCES `auth_function` (`id`)
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `code` varchar(32) DEFAULT NULL,
+  `description` varchar(32) DEFAULT NULL,
+  `page` varchar(32) DEFAULT NULL,
+  `generatemenu` tinyint(1) DEFAULT NULL,
+  `zindex` int(11) DEFAULT NULL,
+  `pid` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `auth_function` */
 
-insert  into `auth_function`(`id`,`name`,`code`,`description`,`page`,`generatemenu`,`zindex`,`pid`) values ('11','基础档案','jichudangan',NULL,NULL,1,0,NULL),('112','收派标准','standard',NULL,'page_base_standard.action',1,1,'11'),('113','取派员设置','staff',NULL,'page_base_staff.action',1,2,'11'),('114','区域设置','region',NULL,'page_base_region.action',1,3,'11'),('115','管理分区','subarea',NULL,'page_base_subarea.action',1,4,'11'),('116','管理定区/调度排班','decidedzone',NULL,'page_base_decidedzone.action',1,5,'11'),('12','受理','shouli',NULL,NULL,1,1,NULL),('121','业务受理','noticebill',NULL,'page_qupai_noticebill_add.action',1,0,'12'),('122','工作单快速录入','quickworkordermanage',NULL,'page_qupai_quickworkorder.action',1,1,'12'),('124','工作单导入','workordermanageimport',NULL,'page_qupai_workorderimport.action',1,3,'12'),('13','调度','diaodu',NULL,NULL,1,2,NULL),('131','查台转单','changestaff',NULL,NULL,1,0,'13'),('132','人工调度','personalassign',NULL,'page_qupai_diaodu.action',1,1,'13');
+insert  into `auth_function`(`id`,`name`,`code`,`description`,`page`,`generatemenu`,`zindex`,`pid`) values ('266be6972d2411e88f65000c29e8042d','订单管理','quick-list','','/quick/page',1,1,'b5b47bca2d2211e88f65000c29e8042d'),('2c5849862d3a11e88f65000c29e8042d','权限管理','authManage-page','','/authManage/page',1,2,'33cb76a52d2511e88f65000c29e8042d'),('33cb76a52d2511e88f65000c29e8042d','系统管理','','','',1,1,NULL),('5aab5e752d3a11e88f65000c29e8042d','角色管理','role-manage','','/roleManage/page',1,3,'33cb76a52d2511e88f65000c29e8042d'),('6ad5f5002d3a11e88f65000c29e8042d','用户管理','user-page','','/user/page',1,4,'33cb76a52d2511e88f65000c29e8042d'),('a5e681a32d2411e88f65000c29e8042d','增加一行','quick-add','','',0,NULL,'266be6972d2411e88f65000c29e8042d'),('b5b47bca2d2211e88f65000c29e8042d','基础数据','','','',1,0,NULL),('b8dad7b62d4411e88f65000c29e8042d','查看列表','quick-list','','',0,NULL,'266be6972d2411e88f65000c29e8042d'),('c23bb1e82d2411e88f65000c29e8042d','取消编辑','quick-cancel','','',0,NULL,'266be6972d2411e88f65000c29e8042d'),('d0975bf82d2411e88f65000c29e8042d','删除','quick-remove','','',0,NULL,'266be6972d2411e88f65000c29e8042d'),('df2d2e002d2411e88f65000c29e8042d','保存','quick-save','','',0,NULL,'266be6972d2411e88f65000c29e8042d'),('f8710f322d3911e88f65000c29e8042d','数据源监控','sys-dbMonit','','/druid/',1,1,'33cb76a52d2511e88f65000c29e8042d');
 
 /*Table structure for table `auth_role` */
 
@@ -52,23 +50,25 @@ CREATE TABLE `auth_role` (
 
 /*Data for the table `auth_role` */
 
+insert  into `auth_role`(`id`,`name`,`code`,`description`) values ('8d9a77fa2d6411e88f65000c29e8042d','超级管理员','超级管理员','超级管理员'),('f7c612272d6511e88f65000c29e8042d','test','test','test');
+
 /*Table structure for table `base_order` */
 
 DROP TABLE IF EXISTS `base_order`;
 
 CREATE TABLE `base_order` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(5) NOT NULL COMMENT '姓名',
-  `telephone` varchar(11) DEFAULT NULL COMMENT '电话号码',
-  `address` varchar(100) NOT NULL COMMENT '地址',
-  `goods_desc` varchar(20) DEFAULT NULL COMMENT '商品描述',
-  `order_num` varchar(40) DEFAULT '0' COMMENT '订单编号',
-  `add_time` datetime DEFAULT NULL COMMENT '添加时间',
-  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
-  `is_delete` tinyint(1) DEFAULT NULL COMMENT '0表示未删除，1表示删除',
-  `export_courier` tinyint(1) DEFAULT NULL COMMENT '0表示未导出，1表示导出',
+  `name` varchar(4) NOT NULL,
+  `telephone` varchar(11) DEFAULT NULL,
+  `address` varchar(999) DEFAULT NULL,
+  `goods_desc` varchar(40) DEFAULT NULL,
+  `order_num` varchar(40) DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `is_delete` tinyint(4) DEFAULT NULL,
+  `export_courier` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `base_order` */
 
@@ -87,26 +87,28 @@ CREATE TABLE `role_function` (
 
 /*Data for the table `role_function` */
 
+insert  into `role_function`(`function_id`,`role_id`) values ('266be6972d2411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('266be6972d2411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('2c5849862d3a11e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('33cb76a52d2511e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('5aab5e752d3a11e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('6ad5f5002d3a11e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('a5e681a32d2411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('a5e681a32d2411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('b5b47bca2d2211e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('b5b47bca2d2211e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('b8dad7b62d4411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('b8dad7b62d4411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('c23bb1e82d2411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('c23bb1e82d2411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('d0975bf82d2411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('d0975bf82d2411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('df2d2e002d2411e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d'),('df2d2e002d2411e88f65000c29e8042d','f7c612272d6511e88f65000c29e8042d'),('f8710f322d3911e88f65000c29e8042d','8d9a77fa2d6411e88f65000c29e8042d');
+
 /*Table structure for table `t_user` */
 
 DROP TABLE IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
   `id` varchar(32) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `username` varchar(32) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
   `salary` double DEFAULT NULL,
-  `birthday` datetime DEFAULT NULL,
-  `gender` varchar(10) DEFAULT NULL,
-  `station` varchar(40) DEFAULT NULL,
-  `telephone` varchar(11) DEFAULT NULL,
-  `remark` varchar(255) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `gender` varchar(32) DEFAULT NULL,
+  `station` varchar(32) DEFAULT NULL,
+  `telephone` varchar(32) DEFAULT NULL,
+  `remark` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_user` */
 
-insert  into `t_user`(`id`,`username`,`password`,`salary`,`birthday`,`gender`,`station`,`telephone`,`remark`) values ('967370822e8b11e89a68000c297d8d87','admin','123456',NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `t_user`(`id`,`username`,`password`,`salary`,`birthday`,`gender`,`station`,`telephone`,`remark`) values ('012a6ae52d6611e88f65000c29e8042d','test','test',NULL,NULL,'','','222',NULL),('1','admin','123456',NULL,NULL,NULL,NULL,NULL,NULL),('9f22437f2d6411e88f65000c29e8042d','1234','1234',1234,NULL,'','','1234',NULL);
 
 /*Table structure for table `user_role` */
 
@@ -122,6 +124,8 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_role` */
+
+insert  into `user_role`(`role_id`,`user_id`) values ('8d9a77fa2d6411e88f65000c29e8042d','9f22437f2d6411e88f65000c29e8042d'),('f7c612272d6511e88f65000c29e8042d','012a6ae52d6611e88f65000c29e8042d');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
