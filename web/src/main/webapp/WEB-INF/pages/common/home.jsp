@@ -27,7 +27,7 @@
 	$(function() {
 		panels = [ {
 			id : 'p1',
-			title : '公共栏',
+			title : '用户设定',
 			height : 255,
 			collapsible : true,
 			href:'page_portal_gonggao.action'
@@ -39,13 +39,13 @@
 			href:'page_portal_daiban.action'
 		}, {
 			id : 'p3',
-			title : '预警信息',
+			title : '留言板',
 			height : 255,
 			collapsible : true,
 			href:'page_portal_yujing.action'
 		}, {
 			id : 'p4',
-			title : '系统BUG反馈',
+			title : '系统使用反馈',
 			height : 255,
 			collapsible : true,
 			href:'page_portal_bug.action'

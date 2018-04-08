@@ -64,15 +64,15 @@
 
 
     <!-- 解决SQL注入拦截器 -->
-    <mvc:interceptors>
-        <!--  使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求   -->
-        <!-- <bean class="com.bybo.aca.web.interceptor.Login"/> -->
-        <mvc:interceptor>
-            <!-- 进行拦截：/**表示拦截所有controller -->
-            <mvc:mapping path="/**"/>
-            <bean class="com.lbx.web.Interceptor.SqlInjectInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash;  使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求   &ndash;&gt;-->
+        <!--&lt;!&ndash; <bean class="com.bybo.aca.web.interceptor.Login"/> &ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash; 进行拦截：/**表示拦截所有controller &ndash;&gt;-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.lbx.web.Interceptor.SqlInjectInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
 
     <!--Shiro的注解授权是利有Spring的AOP实现的。

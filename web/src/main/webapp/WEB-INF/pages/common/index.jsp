@@ -181,7 +181,6 @@
 
         // 版权信息
         function showAbout() {
-            $.messager.alert("宅急送 v1.0", "管理员邮箱: zqx@itcast.cn");
         }
     </script>
 </head>
@@ -225,9 +224,9 @@
 </div>
 <div data-options="region:'center'">
     <div id="tabs" fit="true" class="easyui-tabs" border="false">
-        <div title="订单管理" id="subWarp"
+        <div title="个人设定" id="subWarp"
              style="width:100%;height:100%;overflow:hidden">
-            <iframe src="${pageContext.request.contextPath }/quick/page"
+            <iframe src="${pageContext.request.contextPath }/page/workTable"
                     style="width:100%;height:100%;border:0;"></iframe>
             <%--				这里显示公告栏、预警信息和代办事宜--%>
         </div>
