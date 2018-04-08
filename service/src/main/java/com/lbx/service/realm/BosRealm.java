@@ -61,7 +61,9 @@ public class BosRealm extends AuthorizingRealm {
         if (user.getUsername().equals("admin")) {
             List<String> flagList = authManageService.findAllFlag();
             for (String flag : flagList) {
-                info.addStringPermission(flag);
+                if (StringUtil.isNotEmpty(flag)){
+                    info.addStringPermission(flag);
+                }
             }
             return info;
         }
@@ -74,7 +76,5 @@ public class BosRealm extends AuthorizingRealm {
             }
         }
         return info;
-
-
     }
 }

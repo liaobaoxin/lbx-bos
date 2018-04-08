@@ -85,6 +85,10 @@ public class RoleController {
         List<ZtreeJson> list = new LinkedList<>();
         for (AuthFunction AuthFunction : authFunctionList) {
             if (AuthFunction.getPid() != null) {
+                Integer count = authManageService.findById(AuthFunction.getId());
+                if (count > 0) {
+                    continue;
+                }
                 list.add(new ZtreeJson(AuthFunction.getId(), AuthFunction.getPid(), AuthFunction.getName(), AuthFunction.getPid() == null ? "true" : "false"));
             }
         }

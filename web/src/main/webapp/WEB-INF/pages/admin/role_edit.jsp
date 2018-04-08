@@ -66,7 +66,6 @@
                             treeObj.checkNode(nodes[0], true, true);
                         }
                     }
-
                 },
                 error: function (msg) {
                     alert('树加载异常!');

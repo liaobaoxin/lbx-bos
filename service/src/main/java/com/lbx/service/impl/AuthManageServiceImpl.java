@@ -105,4 +105,10 @@ public class AuthManageServiceImpl implements AuthManageService {
         return authFunctionMapper.findMenuByUserId(userId);
     }
 
+    @Override
+    public int findById(String id) {
+        int id1 = authFunctionMapper.findById(id);
+        return id1;
+    }
+
 }

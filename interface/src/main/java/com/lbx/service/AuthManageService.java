@@ -11,6 +11,7 @@ import java.util.List;
  **/
 public interface AuthManageService {
     List<AuthFunction> findAllPIdIsNull();
+
     List<AuthFunction> findAllByPId(String pId);
 
     Integer insert(AuthFunction authFunction);
@@ -23,11 +24,16 @@ public interface AuthManageService {
 
     Integer delete(String id);
 
-    List<AuthFunction>  findByRoleId(String roleId);
+    List<AuthFunction> findByRoleId(String roleId);
 
     List<String> findFlagByUserId(String userId);
 
     List<String> findAllFlag();
 
     List<AuthFunction> findMenuByUserId(String userId);
+
+    /**
+     * 根据ID查找是否有子类
+     */
+    int findById(String id);
 }

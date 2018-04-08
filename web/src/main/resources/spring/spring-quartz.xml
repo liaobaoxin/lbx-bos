@@ -35,14 +35,14 @@
     </bean>
 
     <!-- 配置调度工厂 -->
-    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <!-- 注入触发器 -->
-        <property name="triggers">
-            <list>
-                <ref bean="myTrigger"/>
-            </list>
-        </property>
-    </bean>
+    <!--<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--&lt;!&ndash; 注入触发器 &ndash;&gt;-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref bean="myTrigger"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 
 

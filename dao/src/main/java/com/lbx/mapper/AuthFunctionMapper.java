@@ -88,4 +88,7 @@ public interface AuthFunctionMapper {
             "    ON rf.function_id = af.id  " +
             "    WHERE u.id=#{userId} AND af.generatemenu='1' ORDER BY af.zindex ASC")
     List<AuthFunction> findMenuByUserId(String userId);
+
+    @Select("SELECT COUNT(*) FROM auth_function WHERE pid = #{id} ")
+    int findById(String id);
 }
