@@ -75,7 +75,7 @@ public interface AuthFunctionMapper {
      * 根据用户ID查找菜单
      */
     @Select("SELECT   " +
-            "   af.id,af.pid,af.generatemenu,af.name " +
+            "   af.id,af.pid,af.generatemenu,af.name, af.page   " +
             "FROM  " +
             "  t_user AS u  " +
             "  INNER JOIN user_role AS ur  " +

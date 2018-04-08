@@ -32,6 +32,7 @@ public class LoginController {
             try {
                 subject.login(token);
                 TUser user = (TUser) subject.getPrincipal();
+                request.getSession().setAttribute("user", user);
                 request.setAttribute("user", user);
                 return "/common/index";
             } catch (Exception ex) {

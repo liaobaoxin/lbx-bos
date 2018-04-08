@@ -190,7 +190,7 @@
      style="height:80px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
     <div id="sessionInfoDiv"
          style="position: absolute;right: 5px;top:10px;">
-        [<strong>${loginUser.username}</strong>]，欢迎你！
+        [<strong>${user.username}</strong>]，欢迎你！
     </div>
     <div style="position: absolute; right: 5px; bottom: 10px; ">
         <a href="javascript:void(0);" class="easyui-menubutton"
