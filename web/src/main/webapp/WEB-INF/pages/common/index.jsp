@@ -226,7 +226,7 @@
     <div id="tabs" fit="true" class="easyui-tabs" border="false">
         <div title="个人设定" id="subWarp"
              style="width:100%;height:100%;overflow:hidden">
-            <iframe src="${pageContext.request.contextPath }/page/workTable"
+            <iframe src="${pageContext.request.contextPath }/page/portal/workTable"
                     style="width:100%;height:100%;border:0;"></iframe>
             <%--				这里显示公告栏、预警信息和代办事宜--%>
         </div>

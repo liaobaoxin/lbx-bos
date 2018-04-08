@@ -30,25 +30,25 @@
 			title : '用户设定',
 			height : 255,
 			collapsible : true,
-			href:'page_portal_gonggao.action'
+			href:'/page/portal/gonggao'
 		}, {
 			id : 'p2',
 			title : '代办事宜',
 			height : 255,
 			collapsible : true,
-			href:'page_portal_daiban.action'
+			href:'/page/portal/daiban'
 		}, {
 			id : 'p3',
 			title : '留言板',
 			height : 255,
 			collapsible : true,
-			href:'page_portal_yujing.action'
+			href:'/page/portal/yujing'
 		}, {
 			id : 'p4',
 			title : '系统使用反馈',
 			height : 255,
 			collapsible : true,
-			href:'page_portal_bug.action'
+			href:'/page/portal/bug'
 		}];
 		 $('#layout_portal_portal').portal({
 			border : false,
