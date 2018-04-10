@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lbx.mapper.BPropertyMapper" >
+  <resultMap id="BaseResultMap" type="com.lbx.domain.BProperty" >
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="telphone" property="telphone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="TINYINT" />
+    <result column="workAge" property="workage" jdbcType="TINYINT" />
+    <result column="sala" property="sala" jdbcType="DECIMAL" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="homeUnit" property="homeunit" jdbcType="VARCHAR" />
+    <result column="timeOfEntry" property="timeofentry" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    name, number, telphone, sex, education, age, workAge, sala, addr, homeUnit, timeOfEntry, 
+    remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lbx.domain.BPropertyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_property
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from b_property
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lbx.domain.BPropertyExample" >
+    delete from b_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lbx.domain.BProperty" >
+    insert into b_property (name, number, telphone, 
+      sex, education, age, workAge, 
+      sala, addr, homeUnit, 
+      timeOfEntry, remarks)
+    values (#{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=BIT}, #{education,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{workage,jdbcType=TINYINT}, 
+      #{sala,jdbcType=DECIMAL}, #{addr,jdbcType=VARCHAR}, #{homeunit,jdbcType=VARCHAR}, 
+      #{timeofentry,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lbx.domain.BProperty" >
+    insert into b_property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="telphone != null" >
+        telphone,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="workage != null" >
+        workAge,
+      </if>
+      <if test="sala != null" >
+        sala,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="homeunit != null" >
+        homeUnit,
+      </if>
+      <if test="timeofentry != null" >
+        timeOfEntry,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="workage != null" >
+        #{workage,jdbcType=TINYINT},
+      </if>
+      <if test="sala != null" >
+        #{sala,jdbcType=DECIMAL},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="homeunit != null" >
+        #{homeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="timeofentry != null" >
+        #{timeofentry,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lbx.domain.BPropertyExample" resultType="java.lang.Integer" >
+    select count(*) from b_property
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_property
+    <set >
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telphone != null" >
+        telphone = #{record.telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=BIT},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=TINYINT},
+      </if>
+      <if test="record.workage != null" >
+        workAge = #{record.workage,jdbcType=TINYINT},
+      </if>
+      <if test="record.sala != null" >
+        sala = #{record.sala,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeunit != null" >
+        homeUnit = #{record.homeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeofentry != null" >
+        timeOfEntry = #{record.timeofentry,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_property
+    set name = #{record.name,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      telphone = #{record.telphone,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
+      education = #{record.education,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=TINYINT},
+      workAge = #{record.workage,jdbcType=TINYINT},
+      sala = #{record.sala,jdbcType=DECIMAL},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      homeUnit = #{record.homeunit,jdbcType=VARCHAR},
+      timeOfEntry = #{record.timeofentry,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lbx.domain.BProperty" >
+    update b_property
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null" >
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="workage != null" >
+        workAge = #{workage,jdbcType=TINYINT},
+      </if>
+      <if test="sala != null" >
+        sala = #{sala,jdbcType=DECIMAL},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="homeunit != null" >
+        homeUnit = #{homeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="timeofentry != null" >
+        timeOfEntry = #{timeofentry,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lbx.domain.BProperty" >
+    update b_property
+    set number = #{number,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      education = #{education,jdbcType=VARCHAR},
+      age = #{age,jdbcType=TINYINT},
+      workAge = #{workage,jdbcType=TINYINT},
+      sala = #{sala,jdbcType=DECIMAL},
+      addr = #{addr,jdbcType=VARCHAR},
+      homeUnit = #{homeunit,jdbcType=VARCHAR},
+      timeOfEntry = #{timeofentry,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -51,62 +51,62 @@
 		</div>
 	</div>
 	<div region="center" style="overflow:auto;padding:5px;" border="false">
-		<form id="noticebillForm" action="${pageContext.request.contextPath }/property/add" method="post">
+		<form id="noticebillForm" action="" method="post">
 			<table class="table-edit" width="95%" align="center">
 				<tr class="title">
-					<td colspan="4">用户信息</td>
+					<td colspan="4">客户信息</td>
 				</tr>
 				<tr>
-					<td>姓名:</td>
-					<td><input type="text" class="easyui-validatebox" name="name"
+					<td>来电号码:</td>
+					<td><input type="text" class="easyui-validatebox" name="telephone"
 						required="true" /></td>
-					<td>编号:</td>
-					<td><input type="text" class="easyui-validatebox"  name="number"
+					<td>客户编号:</td>
+					<td><input type="text" class="easyui-validatebox"  name="customerId"
 						required="true" /></td>
 				</tr>
 				<tr>
-					<td>电话:</td>
-					<td><input type="text" class="easyui-validatebox" name="telphone"
+					<td>客户姓名:</td>
+					<td><input type="text" class="easyui-validatebox" name="customerName"
 						required="true" /></td>
-					<td>性别:</td>
-					<td><input type="text" class="easyui-validatebox" name="sex"
+					<td>联系人:</td>
+					<td><input type="text" class="easyui-validatebox" name="delegater"
 						required="true" /></td>
 				</tr>
 				<tr class="title">
-					<td colspan="4">个人信息</td>
+					<td colspan="4">货物信息</td>
 				</tr>
 				<tr>
-					<td>学历:</td>
-					<td><input type="text" class="easyui-validatebox" name="education"
+					<td>品名:</td>
+					<td><input type="text" class="easyui-validatebox" name="product"
 						required="true" /></td>
-					<td>年龄:</td>
-					<td><input type="text" class="easyui-numberbox" name="age"
-						required="true" /></td>
-				</tr>
-				<tr>
-					<td>工作年龄:</td>
-					<td><input type="text" class="easyui-numberbox" name="workage"
-						required="true" /></td>
-					<td>薪水:</td>
-					<td><input type="text" class="easyui-validatebox" name="sala"
+					<td>件数:</td>
+					<td><input type="text" class="easyui-numberbox" name="num"
 						required="true" /></td>
 				</tr>
 				<tr>
-					<td>地址</td>
-					<td colspan="3"><input type="text" class="easyui-validatebox" name="addr"
+					<td>重量:</td>
+					<td><input type="text" class="easyui-numberbox" name="weight"
+						required="true" /></td>
+					<td>体积:</td>
+					<td><input type="text" class="easyui-validatebox" name="volume"
+						required="true" /></td>
+				</tr>
+				<tr>
+					<td>取件地址</td>
+					<td colspan="3"><input type="text" class="easyui-validatebox" name="pickaddress"
 						required="true" size="144"/></td>
 				</tr>
 				<tr>
-					<td>上家单位:</td>
-					<td><input type="text" class="easyui-validatebox" name="homeunit"
+					<td>到达城市:</td>
+					<td><input type="text" class="easyui-validatebox" name="arrivecity"
 						required="true" /></td>
-					<td>入职时间:</td>
-					<td><input type="text" class="easyui-datebox" name="timeofentry"
+					<td>预约取件时间:</td>
+					<td><input type="text" class="easyui-datebox" name="pickdate"
 						data-options="required:true, editable:false" /></td>
 				</tr>
 				<tr>
 					<td>备注:</td>
-					<td colspan="3"><textarea rows="5" cols="80" type="text" class="easyui-validatebox" name="remarks"
+					<td colspan="3"><textarea rows="5" cols="80" type="text" class="easyui-validatebox" name="remark"
 						required="true" ></textarea></td>
 				</tr>
 			</table>

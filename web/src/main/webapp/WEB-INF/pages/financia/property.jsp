@@ -29,7 +29,7 @@
     <script type="text/javascript">
 
         function doadd() {
-            window.location.href="/property/addPage";
+            window.location.href = "/property/addPage";
         }
 
         function doCancel() {
@@ -67,27 +67,27 @@
             width: 120,
             align: 'center'
         }, {
-            field: 'depart',
-            title: '部门',
+            field: 'number',
+            title: '编号',
             width: 120,
             align: 'center'
         }, {
-            field: 'sala',
-            title: '总工资',
+            field: 'telphone',
+            title: '号码',
             width: 120,
             align: 'center'
         }, {
-            field: 'social',
-            title: '社保',
+            field: 'sex',
+            title: '性别',
             width: 120,
             align: 'center'
         }, {
-            field: 'money',
-            title: '金额',
+            field: 'education',
+            title: '学历',
             width: 120,
             align: 'center'
         }, {
-            field: 'createtime',
+            field: 'timeofentry',
             title: '创建时间',
             width: 100,
             align: 'center'
@@ -115,7 +115,7 @@
 
             // 查询分区
             $('#searchWindow').window({
-                title: '查询分区',
+                title: '查询人员',
                 width: 400,
                 modal: true,
                 shadow: true,
@@ -124,9 +124,17 @@
                 resizable: false
             });
             $("#btn").click(function () {
-                alert("执行查询...");
+                $('#grid').datagrid({
+                    queryParams: {
+                        name: $('#number').val(),
+                        number:$('#userName').val(),
+                        date:$('#date').val(),
+                    }
+                });
                 $("#searchForm").get(0).reset();// 重置查询表单
                 $("#searchWindow").window("close"); // 关闭窗口
+
+
             });
         });
 
@@ -150,16 +158,16 @@
                     <td colspan="2">查询条件</td>
                 </tr>
                 <tr>
-                    <td>客户电话</td>
-                    <td><input type="text" class="easyui-validatebox" required="true"/></td>
+                    <td>姓名</td>
+                    <td><input type="text" id="userName" class="easyui-validatebox" required="true"/></td>
                 </tr>
                 <tr>
-                    <td>取派员</td>
-                    <td><input type="text" class="easyui-validatebox" required="true"/></td>
+                    <td>编号</td>
+                    <td><input type="text"  id="number" class="easyui-validatebox" required="true"/></td>
                 </tr>
                 <tr>
-                    <td>受理时间</td>
-                    <td><input type="text" class="easyui-datebox" required="true"/></td>
+                    <td>创建时间</td>
+                    <td><input type="text"  id="date" class="easyui-datebox " required="true"/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
