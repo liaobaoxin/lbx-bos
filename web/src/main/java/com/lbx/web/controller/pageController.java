@@ -37,4 +37,9 @@ public class pageController {
     public String yujing(){
         return "portal/yujing";
     }
+
+    @RequestMapping("/noticebillAdd")
+    public String noticebillAdd(){
+        return "qupai/noticebill_add";
+    }
 }
